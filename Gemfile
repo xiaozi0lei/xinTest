@@ -42,4 +42,6 @@ group :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'httparty'
+  gem 'pry'
+  gem 'pry-nav'
 end
