@@ -12,8 +12,5 @@
       """
 
     例子:
-      |url                      |result  |
-      |http://www.baidu.com     |百度    |
-      |http://www.google.cn     |Google  |
-      |http://www.tigerbull.info|虎 妞 网|
-
+      | id | url | result |
+      |23|http://www.tigerbull.info|百虎|
