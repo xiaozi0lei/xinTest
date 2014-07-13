@@ -6,6 +6,9 @@ class GetsController < ApplicationController
   # GET /gets.json
   def index
     @gets = Get.all
+    if params[:locale]
+      session[:locale]="zh-CN"
+    end
   end
 
   # GET /gets/1
@@ -78,6 +81,6 @@ class GetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def get_params
-      params.require(:get).permit(:url, :result)
+      params.require(:get).permit(:title, :url, :result)
     end
 end

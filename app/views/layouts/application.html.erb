@@ -8,7 +8,30 @@
 </head>
 <body>
 
+<div id="title">
+  <span>
+    <!--<%= link_to t(:select_language), "#{gets_path}?locale=zh-CN" %>-->
+    <%= link_to "中文", "#{gets_path}?locale=zh-CN" %>
+  </span>
+  <h1><a href="/">xinTest</a></h1>
+</div>
+
+<div id="nav">
+  <%= link_to t(:main_page), "/" %> | 
+  <%= link_to 'Get用例列表', gets_path %> | 
+  <%= link_to '新建Get用例', new_get_path %> | 
+</div>
+
+<div id="menu">
+  <div>
+    <%= link_to t(:case_list), gets_path %>
+  </div>
+</div>
+
+<div id="body">
 <%= yield %>
+</div>
+
 
 </body>
 </html>

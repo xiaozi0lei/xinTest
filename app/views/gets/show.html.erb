@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Url:</strong>
+  <strong><%= t(:url) %>:</strong>
   <%= @get.url %>
 </p>
 
 <p>
-  <strong>Result:</strong>
+  <strong><%= t(:expected_result) %>:</strong>
   <%= @get.result %>
 </p>
 
-<%= link_to 'Edit', edit_get_path(@get) %> |
-<%= link_to 'Back', gets_path %>
+<%= link_to t(:edit), edit_get_path(@get) %> |
+<%= link_to t(:back), gets_path %>

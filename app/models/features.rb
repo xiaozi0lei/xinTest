@@ -7,7 +7,10 @@ class Features
     featureFile = File.open(file,"a+")
 
       id = params[:id]
-      result = params[:result]
+      lines = params[:result]
+      array1 = lines.chomp.split("\r\n")
+      result = []
+      0.upto(array1.length-1) {|x| result[x] = array1[x]}
 
       if params[:url].include? "http"
         url = params[:url]
@@ -15,7 +18,7 @@ class Features
         url = "http://#{params[:url]}"
       end
       
-      featureFile.puts "      |#{id}|#{url}|#{result}|"
+      featureFile.puts "      |#{id}|#{url}|#{result[0]}|#{result[1]}|#{result[2]}|#{result[3]}|#{result[4]}|#{result[5]}|#{result[6]}|#{result[7]}|#{result[8]}|#{result[9]}|"
 
     featureFile.close
   end

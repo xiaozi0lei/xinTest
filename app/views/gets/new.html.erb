@@ -1,5 +1,12 @@
-<h1>New get</h1>
+<div id="getData" style="float: left; width: 50%">
+<h2><%=t :get_data %></h2>
+</div>
+
+<div id="caseRecord" style="float: left">
+<h2><%=t :add_case %></h2>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', gets_path %>
+<%= link_to t(:back), gets_path %>
+</div>
+
