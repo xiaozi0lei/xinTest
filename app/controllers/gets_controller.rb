@@ -6,9 +6,7 @@ class GetsController < ApplicationController
   # GET /gets.json
   def index
     @gets = Get.all
-    if params[:locale]
-      session[:locale]="zh-CN"
-    end
+    
   end
 
   # GET /gets/1
