@@ -37,7 +37,8 @@ gem 'spring',        group: :development
 # gem 'capistrano-rails', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+ gem 'debugger', group: [:development, :test]
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
