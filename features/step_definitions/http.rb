@@ -1,6 +1,6 @@
 require 'pry'
 
-假如(/^请求一个(.*)$/) do |url|
+假如 /^请求一个(.*)$/ do |url|
 #  visit(url)
   @response = MyHttp.get(url)
 end
