@@ -2,6 +2,8 @@ class GetsController < ApplicationController
   before_action :set_get, only: [:show, :edit, :update, :destroy]
   before_action :set_featureFile, only: [:create, :edit, :update, :destroy]
 
+include HTTParty
+default_timeout 3
   # GET /gets
   # GET /gets.json
   def index
@@ -28,14 +30,28 @@ class GetsController < ApplicationController
   def create
     @get = Get.new(get_params)
 
-    respond_to do |format|
-      if @get.save
-        Features.get_create(@featureFile, @get)
-        format.html { redirect_to @get, notice: 'Get was successfully created.' }
-        format.json { render :show, status: :created, location: @get }
-      else
-        format.html { render :new }
-        format.json { render json: @get.errors, status: :unprocessable_entity }
+    if params[:commit] == "test"
+
+      binding.pry
+
+      @get[:result] = self.class.get(@get[:url])
+      respond_to do |format|
+        if @get[:result].nil?
+          format.js {}
+        else
+          format.js {}
+        end
+      end
+    else
+      respond_to do |format|
+        if @get.save
+          Features.get_create(@featureFile, @get)
+          format.html { redirect_to @get, notice: 'Get was successfully created.' }
+          format.json { render :show, status: :created, location: @get }
+        else
+          format.html { render :new }
+          format.json { render json: @get.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

@@ -1,0 +1,5 @@
+<% if @get[:result].nil? %>
+  $("<p>error</p>").appendTo("#getData");
+<% else %>
+  $("<%= escape_javascript(render 'getdata' ) %>").appendTo("#getData");
+<% end %>

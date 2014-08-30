@@ -1,0 +1,10 @@
+<%= form_for(@get, remote: true) do |f| %>
+
+  <div class="field">
+    <%= f.label t(:url) %><br>
+    <%= f.text_field :url %>
+  </div>
+  <div class="actions">
+    <%= f.submit "test" %>
+  </div>
+<% end %>

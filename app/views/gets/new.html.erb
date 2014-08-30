@@ -1,12 +1,16 @@
-<div id="getData" style="float: left; width: 50%">
-<h2><%=t :get_data %></h2>
+<div id="getData" style="float: left; width: 35%">
+  <h2><%=t :get_data %></h2>
+  <%= render 'preview' %>
 </div>
 
-<div id="caseRecord" style="float: left">
+<div style="float: left; font-weight: bold;">
+  <h2><%= link_to t(:back), gets_path %></h2>
+</div>
+
+<div id="caseRecord" style="float: right">
 <h2><%=t :add_case %></h2>
 
 <%= render 'form' %>
 
-<%= link_to t(:back), gets_path %>
 </div>
 
