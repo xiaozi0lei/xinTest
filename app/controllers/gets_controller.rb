@@ -31,16 +31,9 @@ default_timeout 3
     @get = Get.new(get_params)
 
     if params[:commit] == "test"
-
-      binding.pry
-
-      @get[:result] = self.class.get(@get[:url])
+      #@get[:result] = self.class.get(@get[:url])
       respond_to do |format|
-        if @get[:result].nil?
           format.js {}
-        else
-          format.js {}
-        end
       end
     else
       respond_to do |format|

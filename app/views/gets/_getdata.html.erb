@@ -13,6 +13,7 @@
 
   <div id="get_response" class="field">
     <%= f.label t(:expected_result) %><br>
-    <%= f.text_area :result %>
+    <iframe src="<%= @get[:url] %>">
+    </iframe>
   </div>
 <% end %>
