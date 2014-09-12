@@ -1,0 +1,38 @@
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this get from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label t(:case_title) %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label t(:project) %><br>
+    <%= f.text_field :project %>
+  </div>
+  <div class="field">
+    <%= f.label t(:url) %><br>
+    <%= f.text_field :url %>
+  </div>
+  <div class="field">
+    <%= f.label t(:data) %><br>
+    <%= f.text_area :data %>
+  </div>
+  <div class="field">
+    <%= f.label t(:expected_result) %><br>
+    <%= f.text_area :result %>
+    支持多个检查点,一行一个检查点
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

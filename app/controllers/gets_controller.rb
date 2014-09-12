@@ -2,8 +2,6 @@ class GetsController < ApplicationController
   before_action :set_get, only: [:show, :edit, :update, :destroy]
   before_action :set_featureFile, only: [:create, :edit, :update, :destroy]
 
-include HTTParty
-default_timeout 3
   # GET /gets
   # GET /gets.json
   def index
@@ -30,8 +28,8 @@ default_timeout 3
   def create
     @get = Get.new(get_params)
 
+		# 在前台的view视图中直接调用iframe访问对应url
     if params[:commit] == "test"
-      #@get[:result] = self.class.get(@get[:url])
       respond_to do |format|
           format.js {}
       end
@@ -54,7 +52,7 @@ default_timeout 3
   def update
     respond_to do |format|
       if @get.update(get_params)
-        Features.get_destroy(@featureFile, @get)
+        Features.destroy(@featureFile, @get)
         Features.get_create(@featureFile, @get)
         format.html { redirect_to @get, notice: 'Get was successfully updated.' }
         format.json { render :show, status: :ok, location: @get }
@@ -69,7 +67,7 @@ default_timeout 3
   # DELETE /gets/1.json
   def destroy
     @get.destroy
-    Features.get_destroy(@featureFile, @get)
+    Features.destroy(@featureFile, @get)
     respond_to do |format|
       format.html { redirect_to gets_url, notice: 'Get was successfully destroyed.' }
       format.json { head :no_content }
