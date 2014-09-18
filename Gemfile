@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
+source 'https://ruby.taobao.org'
+#source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -37,7 +38,7 @@ gem 'spring',        group: :development
 # gem 'capistrano-rails', group: :development
 
 # Use debugger, debugger is deprete from ruby2.0
- gem 'debugger', group: [:development, :test]
+# gem 'debugger', group: [:development, :test]
 
 group :development, :test do
   gem 'rspec-rails'
