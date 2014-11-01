@@ -17,7 +17,12 @@
   </div>
   <div class="field">
     <%= f.label t(:project) %><br>
-    <%= f.text_field :project %>
+    <%= select_tag(:project, options_for_select([
+          ['单机SDK', 1], ['网游SDK', 2],
+          ['雷电SDK', 3], ['棋牌SDK', 4],
+          ['IOS SDK', 5], ['百度星玩家', 6],
+          ['游戏大厅单机版', 7], ['棋牌大厅', 8]
+          ], @post[:project])) %>
   </div>
   <div class="field">
     <%= f.label t(:url) %><br>

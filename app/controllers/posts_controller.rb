@@ -33,16 +33,26 @@ class PostsController < ApplicationController
   def create
 # 获取页面填写的post参数
     @post = Post.new(post_params)
+    data = @post[:data]
+    url = @post[:url]
+    case @post[:project].to_i
+      when 1, 2, 3, 4, 5 then
+        key = "AKlMU89D3FchIkhK"
+      when 6, 7, 8 then
+        key = "L97fYJp1oPbSMV0n"
+      else
+        raise "invalid key"
+    end
 
 # 对post data数据加密后发送给后台server，获取后台server的返回结果，返回给前台展示
 # 判断commit参数是否为getData_ajax，利用ajax技术局部更新
-    if params[:commit] == "getData_ajax"
+    if params[:commit] == "获取数据" || params[:commit] == "Get Data"
 # require 加密类
       require 'AES'
-      #此处实现AES/ECB/pkcs5padding加密，Base64编码
-      #利用httparty的post类方法发送加密的data到server
+      # 此处实现AES/ECB/pkcs5padding加密，Base64编码
+      # 利用httparty的post类方法发送加密的data到server
       # 此处的self.class.get调用的是include HTTParty类中的方法post
-      @post[:result] = AES.get_json_by_post
+      @post[:result] = AES.get_json_by_post(url, key, data)
       respond_to do |format|
         format.js {}
       end
@@ -115,6 +125,8 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
 # 限制参数，只允许需要的参数操作，保证安全
     def post_params
-      params.require(:post).permit(:title, :project, :url, :data, :result)
+      params_tmp = params.require(:post).permit(:title, :url, :data, :result)
+      params_tmp[:project] = params[:project]
+      params_tmp
     end
 end
