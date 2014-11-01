@@ -13,17 +13,3 @@
  *= require_tree .
  *= require_self
  */
-
-#title span {float: right;}
-#nav {
-  background-color: yellow;
-  padding: 20px;
-  font: bold;
-}
-#menu {
-  float: left;
-  width: 100px;
-  height: 500px;
-  padding: 20px;
-  background-color: pink;
-}
