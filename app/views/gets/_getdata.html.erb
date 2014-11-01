@@ -1,19 +1,5 @@
-<%= form_for(@get) do |f| %>
-  <% if @get.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@get.errors.count, "error") %> prohibited this get from being saved:</h2>
-
-      <ul>
-      <% @get.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>  
-
   <div id="get_response" class="field">
-    <%= f.label t(:expected_result) %><br>
-    <iframe src="<%= @get[:url] %>" scrolling="auto" width="100%" height="300" >
+    <%= t(:expected_result) %><br>
+    <iframe src="<%= @get[:url] %>" frameborder=0 scrolling="auto" width="100%" height="300" >
     </iframe>
   </div>
-<% end %>

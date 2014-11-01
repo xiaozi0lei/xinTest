@@ -16,8 +16,14 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer',  platforms: :ruby
 
+# bootstrap toolkit
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
+
+# redcarpet engine for markdown markup
+gem 'redcarpet'
+# highlight code
+gem 'pygments.rb'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

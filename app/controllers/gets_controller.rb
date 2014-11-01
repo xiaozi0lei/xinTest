@@ -38,8 +38,10 @@ class GetsController < ApplicationController
 # 绝对 URL - 指向其他站点（比如 src="www.example.com/index.html"）
 # 相对 URL - 指向站点内的文件（比如 src="index.html"）
 # 判断commit参数是否为getData_ajax
-    if params[:commit] == "getData_ajax"
-      
+    if params[:commit] == "getData_ajax" || params[:commit] == "获取数据"
+
+      @get[:url] = "http://#{@get[:url]}" unless @get[:url].include? "http"
+
       respond_to do |format|
 # ajax异步调用
           format.js {}
