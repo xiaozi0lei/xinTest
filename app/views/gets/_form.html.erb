@@ -24,7 +24,6 @@
     <%= f.text_area :result, class: "form-control", rows: "8" %>
     支持多个检查点,一行一个检查点
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.submit class: "btn btn-success"%>
+  <%= link_to t(:back), gets_path, class: "btn btn-default"%>
 <% end %>
