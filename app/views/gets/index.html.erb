@@ -1,26 +1,29 @@
-<h2><%=t :case_list %></h2>
+<div class="col-md-1">
+</div>
+
+<div class="col-md-10">
+<h2>Get <%=t :case_list %></h2>
 
 | <%= link_to t(:new_case), new_get_path %> | <br /><br />
 
-<table>
-  <thead>
+<table class="table">
     <tr>
       <th><%=t :case_title %></th>
       <th colspan="3"></th>
     </tr>
-  </thead>
 
-  <tbody>
     <% @gets.each do |get| %>
       <tr>
-        <td><%= get.title %></td>
-        <td><%= link_to t(:show), get %></td>
-        <td><%= link_to t(:edit), edit_get_path(get) %></td>
+        <td><b><%= link_to get.title, get_path(get) %></b></td>
+        <td class="text-right"><%= link_to t(:show), get %></td>
+        <td class="text-center"><%= link_to t(:edit), edit_get_path(get) %></td>
         <td><%= link_to t(:destroy), get, method: :delete, data: { confirm: t(:are_you_sure) } %></td>
       </tr>
     <% end %>
-  </tbody>
 </table>
 
-<br>
+</div>
+
+<div class="col-md-1">
+</div>
 
