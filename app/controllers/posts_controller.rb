@@ -53,6 +53,7 @@ class PostsController < ApplicationController
       # 利用httparty的post类方法发送加密的data到server
       # 此处的self.class.get调用的是include HTTParty类中的方法post
       @post[:result] = AES.get_json_by_post(url, key, data)
+#@post[:result] = JSON.pretty_generate(JSON.parse(result.force_encoding("UTF-8")))
       respond_to do |format|
         format.js {}
       end

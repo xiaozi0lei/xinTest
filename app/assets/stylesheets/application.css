@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+/* padding the fix top nav bar */
+body {
+  padding-top: 70px;
+}
+

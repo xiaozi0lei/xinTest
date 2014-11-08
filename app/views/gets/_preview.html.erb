@@ -2,11 +2,11 @@
 
   <p>
     <%= f.label t(:url) %><br>
-    <%= f.text_field :url %>
+    <%= f.text_field :url, class: "form-control" %>
   </p>
 
   <p>
-    <%= f.submit t("getData_ajax"), class: "btn btn-default" %>
+    <%= f.submit t("getData_ajax"), class: "btn btn-primary" %>
   </p>
 
 <% end %>
