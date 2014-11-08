@@ -1,13 +1,15 @@
 <%= form_for(@get, remote: true) do |f| %>
 
-  <div class="field">
+  <p>
     <%= f.label t(:url) %><br>
     <%= f.text_field :url %>
-  </div>
-  <div class="actions">
-    <%= f.submit t("getData_ajax") %>
-  </div>
+  </p>
+
+  <p>
+    <%= f.submit t("getData_ajax"), class: "btn btn-default" %>
+  </p>
 
 <% end %>
+
 <%= render 'getdata' %>
 

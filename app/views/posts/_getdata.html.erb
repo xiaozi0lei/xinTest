@@ -1,4 +1,3 @@
-<%= form_for(@post) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this get from being saved:</h2>
@@ -12,7 +11,9 @@
   <% end %>  
 
   <div id="get_response" class="field">
-    <%= f.label t(:expected_result) %><br>
-		<%= @post.result.force_encoding("UTF-8") %>
+    <%= t(:expected_result) %><br>
+    <p>
+      <%= @post.result.force_encoding("UTF-8") unless @post.result.nil? %>
+    </p>
   </div>
-<% end %>
+
