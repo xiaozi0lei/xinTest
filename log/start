@@ -1,5 +1,0 @@
-#!/bin/bash --login
-
-rvm use 2.0.0
-#nohup rackup ../config.ru > xinTest.log &
-nohup rails s > xinTest.log 2>&1 &

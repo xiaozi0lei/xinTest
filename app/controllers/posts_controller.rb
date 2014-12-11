@@ -37,9 +37,9 @@ class PostsController < ApplicationController
     url = @post[:url]
     case @post[:project].to_i
       when 1, 2, 3, 4, 5 then
-        key = "AKlMU89D3FchIkhK"
+        key = ENV['KEY1']
       when 6, 7, 8 then
-        key = "L97fYJp1oPbSMV0n"
+        key = ENV['KEY2']
       else
         raise "invalid key"
     end
