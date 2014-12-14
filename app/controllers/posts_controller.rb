@@ -9,7 +9,19 @@ class PostsController < ApplicationController
   # GET /posts.json
 # 对应于前台的"post用例列表"
   def index
-    @posts = Post.all
+    if params[:project].nil?
+      @posts = Post.all
+    else
+      case params[:project].to_i
+      when 1 then
+        @posts = Post.where(project: "1")
+      when 2 then
+        @posts = Post.where(project: "2")
+      else
+        raise "invalid project"
+    end
+
+    end
   end
 
   # GET /posts/1
