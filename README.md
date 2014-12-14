@@ -1,4 +1,4 @@
 xinTest
 =======
 
-Web automation test app
+web automation test app
