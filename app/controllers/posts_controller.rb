@@ -10,27 +10,27 @@ class PostsController < ApplicationController
 # 对应于前台的"post用例列表"
   def index
     if params[:project].nil?
-        @posts = Post.all
+      @posts = Post.all
     else
       case params[:project].to_i
-      when 1 then
-        @posts = Post.where(project: "1")
-      when 2 then
-        @posts = Post.where(project: "2")
-      when 3 then 
-        @posts = Post.where(project: "3")
-      when 4 then
-        @posts = Post.where(project: "4")
-      when 5 then
-        @posts = Post.where(project: "5")
-      when 6 then
-        @posts = Post.where(project: "6")
-      when 7 then 
-        @posts = Post.where(project: "7")
-      when 8 then
-        @posts = Post.where(project: "8")
-      else
-        raise "invalid project"
+        when 1 then
+          @posts = Post.where(project: "1")
+        when 2 then
+          @posts = Post.where(project: "2")
+        when 3 then 
+          @posts = Post.where(project: "3")
+        when 4 then
+          @posts = Post.where(project: "4")
+        when 5 then
+          @posts = Post.where(project: "5")
+        when 6 then
+          @posts = Post.where(project: "6")
+        when 7 then 
+          @posts = Post.where(project: "7")
+        when 8 then
+          @posts = Post.where(project: "8")
+    else
+      raise "invalid project"
     end
 
     end
