@@ -25,6 +25,8 @@ gem 'redcarpet'
 # highlight code
 gem 'pygments.rb'
 
+# 简化http访问请求
+gem 'httparty'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -50,13 +52,15 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 group :development, :test do
-  gem 'rspec-rails'
-  gem 'database_cleaner'
-  gem 'httparty'
+  # 断点，调试工具
   gem 'pry'
   gem 'pry-nav'
 end
 
 group :test do
-  gem 'cucumber-rails'
+  gem 'database_cleaner'
+  # rspec TDD测试框架
+  gem 'rspec-rails'
+  # Acceptance test framework for web applications
+  gem 'capybara'
 end
