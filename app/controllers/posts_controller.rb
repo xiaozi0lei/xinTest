@@ -29,9 +29,9 @@ class PostsController < ApplicationController
           @posts = Post.where(project: "7")
         when 8 then
           @posts = Post.where(project: "8")
-    else
-      raise "invalid project"
-    end
+      else
+        raise "invalid project"
+      end
 
     end
   end
