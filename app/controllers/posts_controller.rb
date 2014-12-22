@@ -10,7 +10,7 @@ class PostsController < ApplicationController
 # 对应于前台的"post用例列表"
   def index
     if params[:project].nil?
-      @posts = Post.all
+        @posts = Post.all
     else
       case params[:project].to_i
       when 1 then
