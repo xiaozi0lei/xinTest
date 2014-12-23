@@ -53,6 +53,7 @@ gem 'spring',        group: :development
 
 group :development do
   gem 'cucumber-rails'
+  gem 'rake','~>10.3.2'
 end
 
 group :development, :test do
