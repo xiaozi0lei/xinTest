@@ -51,6 +51,10 @@ gem 'spring',        group: :development
 # Use debugger, debugger is deprete from ruby2.0
 # gem 'debugger', group: [:development, :test]
 
+group :development do
+  gem 'cucumber-rails'
+end
+
 group :development, :test do
   # 断点，调试工具
   gem 'pry'
