@@ -16,6 +16,15 @@
     <%= f.text_field :title, class: "form-control" %>
   </div>
   <div class="field">
+    <%= f.label t(:project) %><br>
+    <%= select_tag(:project, options_for_select([
+      ['单机SDK', 1], ['网游SDK', 2],
+      ['18183', 3], ['争霸赛', 4],
+      ['iOS SDK', 5], ['百度星玩家', 6],
+      ['Game+', 7], ['棋牌大厅', 8]
+      ], @get[:project])) %>
+  </div>
+  <div class="field">
     <%= f.label t(:url) %><br>
     <%= f.text_field :url, class: "form-control" %>
   </div>

@@ -1,6 +1,11 @@
   <div id="get_response">
     <label><%= t(:expected_result) %></label><br>
-    <iframe src="<%= @get[:url] %>" frameborder=0 scrolling="auto" width="100%" height="300" >
-    </iframe>
+    <iframe src="<%= @get[:url] %>" frameborder=0 scrolling="auto" width="100%" height="300" >  
+    </iframe>   
+<!--    <br />
+      <pre lang="zh">
+        <%= JSON.pretty_generate(JSON.parse(@get.result.force_encoding("UTF-8"))) unless @get.result.nil? %>
+      </pre>
+-->
   </div>
 

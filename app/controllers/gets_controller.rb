@@ -9,7 +9,30 @@ class GetsController < ApplicationController
   # GET /gets.json
 # 对应于前台的"get用例列表"
   def index
-    @gets = Get.all
+    if params[:project].nil?
+      @gets = Get.all
+    else
+      case params[:project].to_i
+        when 1 then
+          @gets = Get.where(project: "1")
+        when 2 then
+          @gets = Get.where(project: "2")
+        when 3 then 
+          @gets = Get.where(project: "3")
+        when 4 then
+          @gets = Get.where(project: "4")
+        when 5 then
+          @gets = Get.where(project: "5")
+        when 6 then
+          @gets = Get.where(project: "6")
+        when 7 then 
+          @gets = Get.where(project: "7")
+        when 8 then
+          @gets = Get.where(project: "8")
+      else
+        raise "invalid project"
+      end
+    end
   end
 
   # GET /gets/1
