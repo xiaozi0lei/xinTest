@@ -15,8 +15,8 @@
 /log/*.log
 /tmp
 
-/features/get/*
-/features/post/*
+/features/get/*.bak
+/features/post/*.bak
 *.feature
 
 *.bak
@@ -24,3 +24,5 @@
 *.out
 *~
 /log/start
+
+/tags
