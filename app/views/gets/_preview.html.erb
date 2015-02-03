@@ -1,25 +1,2 @@
-<%= form_for(@get, remote: true) do |f| %>
-
-  <p>
-    <%= f.label t(:project) %><br>
-    <%= select_tag(:project, options_for_select([
-      ['单机SDK', 1], ['网游SDK', 2],
-      ['18183', 3], ['争霸赛', 4],
-      ['iOS SDK', 5], ['百度星玩家', 6],
-      ['Game+', 7], ['棋牌大厅', 8]
-      ], @get[:project])) %>
-  </p>
-
-  <p>
-    <%= f.label t(:url) %><br>
-    <%= f.text_field :url, class: "form-control" %>
-  </p>
-
-  <p>
-    <%= f.submit t("getData_ajax"), class: "btn btn-primary" %>
-  </p>
-
-<% end %>
-
 <%= render 'getdata' %>
 
