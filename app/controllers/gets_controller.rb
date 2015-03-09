@@ -56,7 +56,26 @@ class GetsController < ApplicationController
   def create
 # 获取页面填写的get参数
     @get = Get.new(get_params)
-
+    case @get[:project].to_i
+      when 1 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "standalone.feature")
+      when 2 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "online.feature")
+      when 3 then 
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "18183.feature")
+      when 4 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+      when 5 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+      when 6 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+      when 7 then 
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+      when 8 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+    else
+      raise "invalid project"
+    end
 # 在前台的view视图中直接调用iframe访问对应url
 # 绝对 URL - 指向其他站点（比如 src="www.example.com/index.html"）
 # 相对 URL - 指向站点内的文件（比如 src="index.html"）
@@ -79,6 +98,7 @@ class GetsController < ApplicationController
 # 转到创建成功页面
           format.html { redirect_to @get, notice: 'Get was successfully created.' }
           format.json { render :show, status: :created, location: @get }
+          format.js { redirect_to @get, notice: 'Get was successfully created.' }
         else
 # 创建失败，提示错误信息，重新渲染新建页面，保留输入信息
           format.html { render :new }
