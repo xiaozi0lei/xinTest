@@ -1,4 +1,4 @@
-<%= form_for(@get) do |f| %>
+<%= form_for(@get, remote: true) do |f| %>
   <% if @get.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@get.errors.count, "error") %> prohibited this get from being saved:</h2>
@@ -17,12 +17,12 @@
   </div>
   <div class="field">
     <%= f.label t(:project) %><br>
-    <%= select_tag(:project, options_for_select([
+    <%= f.select(:project, [
       ['单机SDK', 1], ['网游SDK', 2],
       ['18183', 3], ['争霸赛', 4],
       ['iOS SDK', 5], ['百度星玩家', 6],
       ['Game+', 7], ['棋牌大厅', 8]
-      ], @get[:project])) %>
+      ]) %>
   </div>
   <div class="field">
     <%= f.label t(:url) %><br>
@@ -33,6 +33,7 @@
     <%= f.text_area :result, class: "form-control", rows: "8" %>
     支持多个检查点,一行一个检查点
   </div>
-  <%= f.submit class: "btn btn-success"%>
-  <%= link_to t(:back), gets_path, class: "btn btn-default"%>
+  <%= f.submit class: "btn btn-success" %>
+  <%= link_to t(:back), gets_path, class: "btn btn-default" %>
+  <%= f.submit t("getData_ajax"), class: "btn btn-primary" %>
 <% end %>

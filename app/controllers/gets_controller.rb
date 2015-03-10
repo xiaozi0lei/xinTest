@@ -56,14 +56,34 @@ class GetsController < ApplicationController
   def create
 # 获取页面填写的get参数
     @get = Get.new(get_params)
-
+    case @get[:project].to_i
+      when 1 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "standalone.feature")
+      when 2 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "online.feature")
+      when 3 then 
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "18183.feature")
+      when 4 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+      when 5 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+      when 6 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+      when 7 then 
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+      when 8 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+    else
+      raise "invalid project"
+    end
 # 在前台的view视图中直接调用iframe访问对应url
 # 绝对 URL - 指向其他站点（比如 src="www.example.com/index.html"）
 # 相对 URL - 指向站点内的文件（比如 src="index.html"）
 # 判断commit参数是否为getData_ajax
     if params[:commit] == "getData_ajax" || params[:commit] == "获取数据"
+      @get_url = @get[:url]
 
-      @get[:url] = "http://#{@get[:url]}" unless @get[:url].include? "http"
+      @get_url = "http://#{@get[:url]}" unless @get[:url].include? "http"
 
       respond_to do |format|
 # ajax异步调用
@@ -78,6 +98,7 @@ class GetsController < ApplicationController
 # 转到创建成功页面
           format.html { redirect_to @get, notice: 'Get was successfully created.' }
           format.json { render :show, status: :created, location: @get }
+          format.js { redirect_to @get, notice: 'Get was successfully created.' }
         else
 # 创建失败，提示错误信息，重新渲染新建页面，保留输入信息
           format.html { render :new }
@@ -91,20 +112,33 @@ class GetsController < ApplicationController
   # PATCH/PUT /gets/1.json
 # 对应于编辑界面
   def update
-    respond_to do |format|
+    if params[:commit] == "getData_ajax" || params[:commit] == "获取数据"
+
+      @get_url = params[:get][:url]
+      @get_url = "http://#{params[:get][:url]}" unless params[:get][:url].include? "http"
+
+      respond_to do |format|
+# ajax异步调用
+          format.js {}
+      end
+    else
+      respond_to do |format|
 # 如果用例更新成功后，先删除cucumber旧的测试用例，再添加更新后的测试用例到cucumber文件中
-      if @get.update(get_params)
+        if @get.update(get_params)
 # 删除老的cucumber测试用例
-        Features.destroy(@featureFile, @get)
+          Features.destroy(@featureFile, @get)
 # 添加新的cucumber测试用例
-        Features.get_create(@featureFile, @get)
+          Features.get_create(@featureFile, @get)
 # 提示更新成功
-        format.html { redirect_to @get, notice: 'Get was successfully updated.' }
-        format.json { render :show, status: :ok, location: @get }
-      else
+          format.js {}
+          format.html { redirect_to @get, notice: 'Get was successfully updated.' }
+          format.json { render :show, status: :ok, location: @get }
+        else
 # 更新失败，提示失败原因
-        format.html { render :edit }
-        format.json { render json: @get.errors, status: :unprocessable_entity }
+          format.js {}
+          format.html { render :edit }
+          format.json { render json: @get.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -138,6 +172,6 @@ class GetsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
 # 限制参数，只允许需要的参数操作，保证安全
     def get_params
-      params.require(:get).permit(:title, :url, :result)
+      params.require(:get).permit(:title, :url, :result, :project)
     end
 end

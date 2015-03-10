@@ -36,4 +36,16 @@ class AES
     plain = decipher.update(decode) + decipher.final
     
   end
+
+  
+  def self.get_json_by_post_without_encrypt(url, data)
+    encode = Base64.strict_encode64(data)
+    
+    response = MyHttp.post(url, :body => encode,
+    :headers => {
+    'Content-Type' => 'application/json'
+    })
+    decode = Base64.strict_decode64(response)
+  end
+
 end

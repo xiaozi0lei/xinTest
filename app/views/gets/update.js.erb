@@ -1,0 +1,15 @@
+<% if params[:commit] == "getData_ajax" || params[:commit] == "获取数据" %>
+  if ($("#get_response"))
+  {
+    $("#get_response").remove();
+    $("#get_p").remove();
+    $("<%= escape_javascript(render 'getdata' ) %>").appendTo("#getData");
+  }
+<% else %>
+  if ($("#get_response"))
+  {
+    $("#get_response").remove();
+    $("#get_p").remove();
+    $("<p id='get_p'>更新Successful!</p>").appendTo("#getData");
+  }
+<% end %>

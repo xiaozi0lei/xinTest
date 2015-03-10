@@ -52,7 +52,6 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 group :development do
-  gem 'cucumber-rails'
   gem 'rake','~>10.3.2'
 end
 
@@ -63,6 +62,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'cucumber-rails'
   gem 'database_cleaner'
   # rspec TDD测试框架
   gem 'rspec-rails'
