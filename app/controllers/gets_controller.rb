@@ -126,6 +126,26 @@ class GetsController < ApplicationController
 # 如果用例更新成功后，先删除cucumber旧的测试用例，再添加更新后的测试用例到cucumber文件中
         if @get.update(get_params)
 # 删除老的cucumber测试用例
+          case @get[:project].to_i
+            when 1 then
+              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "standalone.feature")
+            when 2 then
+              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "online.feature")
+            when 3 then 
+              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "18183.feature")
+            when 4 then
+              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+            when 5 then
+              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+            when 6 then
+              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+            when 7 then 
+              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+            when 8 then
+              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+          else
+            raise "invalid project"
+          end
           Features.destroy(@featureFile, @get)
 # 添加新的cucumber测试用例
           Features.get_create(@featureFile, @get)
@@ -149,6 +169,26 @@ class GetsController < ApplicationController
   def destroy
     @get.destroy
 # 如果删除成功，则删除对应的cucumber测试用例
+    case @get[:project].to_i
+      when 1 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "standalone.feature")
+      when 2 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "online.feature")
+      when 3 then 
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "18183.feature")
+      when 4 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+      when 5 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+      when 6 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+      when 7 then 
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+      when 8 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+    else
+      raise "invalid project"
+    end
     Features.destroy(@featureFile, @get)
 # 提示删除成功
     respond_to do |format|
