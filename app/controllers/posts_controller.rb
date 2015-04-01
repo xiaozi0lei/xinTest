@@ -60,12 +60,15 @@ class PostsController < ApplicationController
     data = @post[:data]
     url = @post[:url]
     case @post[:project].to_i
-      when 1, 2, 3, 4, 5 then
+      when 1, 2, 3, 4 then
         key = ENV['KEY1']
-      when 6, 7, 8 then
+      when 5, 6  then
         key = ENV['KEY2']
+      when 8 then
+        key = ENV['KEY3']
       else
-        raise "invalid key"
+        key = 'none'
+#raise "invalid key"
     end
 
 # 对post data数据加密后发送给后台server，获取后台server的返回结果，返回给前台展示
@@ -76,7 +79,11 @@ class PostsController < ApplicationController
       # 此处实现AES/ECB/pkcs5padding加密，Base64编码
       # 利用httparty的post类方法发送加密的data到server
       # 此处的self.class.get调用的是include HTTParty类中的方法post
-      @post[:result] = AES.get_json_by_post(url, key, data)
+      if key == "none" 
+        @post[:result] = AES.get_json_by_post_without_encode(url, data)
+      else
+        @post[:result] = AES.get_json_by_post(url, key, data)
+      end
 #@post[:result] = JSON.pretty_generate(JSON.parse(result.force_encoding("UTF-8")))
       respond_to do |format|
         format.js {}
