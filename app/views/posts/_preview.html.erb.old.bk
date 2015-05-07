@@ -1,0 +1,31 @@
+<%= form_for(@post, remote: true) do |f| %>
+
+  <p>
+    <%= f.label t(:project) %><br>
+    <%= select_tag(:project, options_for_select([
+          ['单机SDK', 1], ['网游SDK', 2],
+          ['18183', 3], ['争霸赛', 4],
+          ['IOS SDK', 5], ['百度星玩家', 6],
+          ['AnySDK', 7], ['CRM星玩家', 8]
+          ], @post[:project])) %>
+  </p>
+
+
+  <p>
+    <%= f.label t(:url) %><br>
+    <%= f.text_field :url, class: "form-control" %>
+  </p>
+
+  
+  <p>
+    <%= f.label t(:data) %><br>
+    <%= f.text_area :data, class: "form-control", rows: "6" %>
+  </p>
+
+  <p>
+    <%= f.submit t("getData_ajax"), class: "btn btn-primary" %>
+  </p>
+<% end %>
+
+<%= render 'getdata' %>
+

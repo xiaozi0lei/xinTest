@@ -70,9 +70,9 @@ class GetsController < ApplicationController
       when 6 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "mobileassistant.feature")
       when 7 then 
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "onesdk.feature")
       when 8 then
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "mobileassistant.feature")
     else
       raise "invalid project"
     end
@@ -140,9 +140,9 @@ class GetsController < ApplicationController
             when 6 then
               @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "mobileassistant.feature")
             when 7 then 
-              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "onesdk.feature")
             when 8 then
-              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "mobileassistant.feature")
           else
             raise "invalid project"
           end
@@ -183,9 +183,9 @@ class GetsController < ApplicationController
       when 6 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "mobileassistant.feature")
       when 7 then 
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "onesdk.feature")
       when 8 then
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "mobileassistant.feature")
     else
       raise "invalid project"
     end

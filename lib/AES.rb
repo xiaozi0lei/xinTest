@@ -50,7 +50,6 @@ class AES
 
 
   def self.get_json_by_post_without_encode(url, data)
-
     response = MyHttp.post(url, :body =>data,
     :headers => {
     'Content-Type' => 'application/json'

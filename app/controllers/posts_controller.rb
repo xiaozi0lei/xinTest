@@ -59,6 +59,8 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     data = @post[:data]
     url = @post[:url]
+    require 'pry'
+    binding.pry
     case @post[:project].to_i
       when 1, 2, 3, 4 then
         key = ENV['KEY1']
@@ -94,7 +96,7 @@ class PostsController < ApplicationController
 
 # 对post data数据加密后发送给后台server，获取后台server的返回结果，返回给前台展示
 # 判断commit参数是否为getData_ajax，利用ajax技术局部更新
-    if params[:commit] == "获取数据" || params[:commit] == "Get Data"
+    if params[:commit] == "Get Data" || params[:commit] == "获取数据"
 # require 加密类
       require 'AES'
       # 此处实现AES/ECB/pkcs5padding加密，Base64编码
