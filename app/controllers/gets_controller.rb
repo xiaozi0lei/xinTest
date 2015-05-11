@@ -64,15 +64,15 @@ class GetsController < ApplicationController
       when 3 then 
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "18183.feature")
       when 4 then
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "comepete.feature")
       when 5 then
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "ios.feature")
       when 6 then
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "mobileassistant.feature")
       when 7 then 
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "onesdk.feature")
       when 8 then
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "CRM.feature")
     else
       raise "invalid project"
     end
@@ -134,15 +134,15 @@ class GetsController < ApplicationController
             when 3 then 
               @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "18183.feature")
             when 4 then
-              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "compete.feature")
             when 5 then
-              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "ios.feature")
             when 6 then
-              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "mobileassistant.feature")
             when 7 then 
-              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "onesdk.feature")
             when 8 then
-              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "CRM.feature")
           else
             raise "invalid project"
           end
@@ -177,15 +177,15 @@ class GetsController < ApplicationController
       when 3 then 
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "18183.feature")
       when 4 then
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "compete.feature")
       when 5 then
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "ios.feature")
       when 6 then
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "mobileassistant.feature")
       when 7 then 
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "onesdk.feature")
       when 8 then
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "CRM.feature")
     else
       raise "invalid project"
     end

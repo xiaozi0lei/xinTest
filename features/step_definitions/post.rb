@@ -1,9 +1,11 @@
 假如 /^请求一个post方法的来自(.*)项目带有(.*)数据的(.*)$/ do |project, data, url|
   case project.to_i
-    when 1, 2, 3, 4, 5 then
+    when 1, 2, 3, 4  then
       key = "AKlMU89D3FchIkhK"
-    when 6, 7, 8 then
+    when 5, 6  then
       key = "L97fYJp1oPbSMV0n"
+    when 8 then
+      key = "S94sYJp2oPvSMQ0m"
     else
       raise "invalid key"
   end

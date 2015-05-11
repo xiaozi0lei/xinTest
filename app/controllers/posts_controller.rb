@@ -60,23 +60,51 @@ class PostsController < ApplicationController
     data = @post[:data]
     url = @post[:url]
     case @post[:project].to_i
-      when 1, 2, 3, 4, 5 then
+      when 1, 2, 3, 4 then
         key = ENV['KEY1']
-      when 6, 7, 8 then
+      when 5, 6  then
         key = ENV['KEY2']
+      when 8 then
+        key = ENV['KEY3']
       else
-        raise "invalid key"
+        key = 'none'
+#raise "invalid key"
     end
+    case @post[:project].to_i
+      when 1 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "standalone.feature")
+      when 2 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "online.feature")  
+      when 3 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "18183.feature")
+      when 4 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "compete.feature")
+      when 5 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "ios.feature")
+      when 6 then 
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "mobileassistant.feature")
+      when 7 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "onesdk.feature")
+      when 8 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "CRM.feature")
+      else  
+        raise "invalid project"
+    end
+        
 
 # 对post data数据加密后发送给后台server，获取后台server的返回结果，返回给前台展示
 # 判断commit参数是否为getData_ajax，利用ajax技术局部更新
-    if params[:commit] == "获取数据" || params[:commit] == "Get Data"
+    if params[:commit] == "Get Data" || params[:commit] == "获取数据"
 # require 加密类
       require 'AES'
       # 此处实现AES/ECB/pkcs5padding加密，Base64编码
       # 利用httparty的post类方法发送加密的data到server
       # 此处的self.class.get调用的是include HTTParty类中的方法post
-      @post[:result] = AES.get_json_by_post(url, key, data)
+      if key == "none" 
+        @post[:result] = AES.get_json_by_post_without_encode(url, data)
+      else
+        @post[:result] = AES.get_json_by_post(url, key, data)
+      end
 #@post[:result] = JSON.pretty_generate(JSON.parse(result.force_encoding("UTF-8")))
       respond_to do |format|
         format.js {}
@@ -106,6 +134,26 @@ class PostsController < ApplicationController
     respond_to do |format|
 # 如果用例更新成功后，先删除cucumber旧的测试用例，再添加更新后的测试用例到cucumber文件中
       if @post.update(post_params)
+        case @post[:project].to_i
+      when 1 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "standalone.feature")
+      when 2 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "online.feature")  
+      when 3 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "18183.feature")
+      when 4 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "compete.feature")
+      when 5 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "ios.feature")
+      when 6 then 
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "mobileassistant.feature")
+      when 7 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "onesdk.feature")
+      when 8 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "CRM.feature")
+      else  
+        raise "invalid project"
+    end  
 # 删除老的cucumber测试用例
         Features.destroy(@featureFile, @post)
 # 添加新的cucumber测试用例
@@ -126,7 +174,27 @@ class PostsController < ApplicationController
 # 对应于用例删除按钮，删除用例
   def destroy
     @post.destroy
-# 如果删除成功，则删除对应的cucumber测试用例
+# 如果删除成功，则删除对应的cucumber测试用
+    case @post[:project].to_i
+      when 1 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "standalone.feature")
+      when 2 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "online.feature")  
+      when 3 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "18183.feature")
+      when 4 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "compete.feature")
+      when 5 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "ios.feature")
+      when 6 then 
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "mobileassistant.feature")
+      when 7 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "onesdk.feature")
+      when 8 then
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "CRM.feature")
+      else  
+        raise "invalid project"
+    end
     Features.destroy(@featureFile, @post)
 # 提示删除成功
     respond_to do |format|
