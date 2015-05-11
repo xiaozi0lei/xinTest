@@ -72,7 +72,7 @@ class GetsController < ApplicationController
       when 7 then 
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "onesdk.feature")
       when 8 then
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "mobileassistant.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "CRM.feature")
     else
       raise "invalid project"
     end
@@ -142,7 +142,7 @@ class GetsController < ApplicationController
             when 7 then 
               @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "onesdk.feature")
             when 8 then
-              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "mobileassistant.feature")
+              @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "CRM.feature")
           else
             raise "invalid project"
           end
@@ -185,7 +185,7 @@ class GetsController < ApplicationController
       when 7 then 
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "onesdk.feature")
       when 8 then
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "mobileassistant.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "CRM.feature")
     else
       raise "invalid project"
     end
