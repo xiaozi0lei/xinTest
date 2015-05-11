@@ -59,8 +59,6 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     data = @post[:data]
     url = @post[:url]
-    require 'pry'
-    binding.pry
     case @post[:project].to_i
       when 1, 2, 3, 4 then
         key = ENV['KEY1']
@@ -88,7 +86,7 @@ class PostsController < ApplicationController
       when 7 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "onesdk.feature")
       when 8 then
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "mobileassistant.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "CRM.feature")
       else  
         raise "invalid project"
     end
@@ -152,7 +150,7 @@ class PostsController < ApplicationController
       when 7 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "onesdk.feature")
       when 8 then
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "mobileassistant.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "CRM.feature")
       else  
         raise "invalid project"
     end  
@@ -193,7 +191,7 @@ class PostsController < ApplicationController
       when 7 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "onesdk.feature")
       when 8 then
-        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "mobileassistant.feature")
+        @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "CRM.feature")
       else  
         raise "invalid project"
     end

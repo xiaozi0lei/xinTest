@@ -206,8 +206,8 @@ class GetsController < ApplicationController
 
 # 设置要编辑的cucumber feature文件
     def set_featureFile
-     @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
-   end
+      @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "get_json.feature")
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
 # 限制参数，只允许需要的参数操作，保证安全
