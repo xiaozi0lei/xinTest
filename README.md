@@ -34,3 +34,7 @@ web automation test app
 9. 创建数据库 `rake db:create`
 10. 数据库迁移 `rake db:migrate`
 11. 启动程序 `rails s`
+
+##docker
+docker run --name db -e POSTGRES_PASSWORD=postgres -d postgres
+docker run --name xintest -it --link db:postgres -p 3000:3000 -d xintest
