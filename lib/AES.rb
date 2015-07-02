@@ -53,7 +53,7 @@ class AES
     response = MyHttp.post(url, :body =>data,
     :headers => {
     'Content-Type' => 'application/json'
-    })
+    }).to_json
   end
 
 
