@@ -25,6 +25,10 @@ web automation test app
 5. bundle项目所需要的gem包
   ```bash
   cd xinTest
+  gem sources --remove https://rubygems.org/
+  gem sources -a https://ruby.taobao.org/
+  gem sources -l
+  gem install bundler
   bundle install
   ```
 
