@@ -5,6 +5,17 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script type="text/javascript">
+    var ready;
+    ready = function() {
+      var str = window.location.href;
+      var url = str.replace(/^(?:\/\/|[^\/]+)*/, "");
+      $('.nav a[href="'+url+'"]').parent().addClass('active');
+    };
+    $(document).ready(ready);
+    $(document).on('page:load', ready);
+  </script>
+  </head>
 </head>
 <body>
 
@@ -27,6 +38,7 @@
           <li><%= link_to 'Get用例列表', gets_path %></li>
           <li><%= link_to '新建Get用例', new_get_path %></li>
           <li><%= link_to 'Post用例列表', posts_path %></li>
+          <li><%= link_to 'Post测试', posts_test_path %></li>
           <li><%= link_to '新建Post用例', new_post_path %></li>
         </ul>
         <!-- sign in and sign up 登陆和注册 -->

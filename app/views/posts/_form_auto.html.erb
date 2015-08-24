@@ -27,11 +27,15 @@
   </div>
   <div>
     <%= f.label t(:url) %><br />
-    <%= f.text_field :url, class: "form-control" %>
+    <%= f.text_area :url, class: "form-control", rows: "3" %>
+  </div>
+  <div>
+    <%= f.label "参数" %> | 请输入上方网址端口号后的参数<br />
+    http://[URL]:[PORT]/<%= f.text_field :parameter, class: "form-control" %>
   </div>
   <div>
     <%= f.label t(:data) %><br />
-    <%= f.text_area :data, class: "form-control", rows: "3" %>
+    <%= f.text_area :data, class: "form-control", rows: "8" %>
   </div>
   <div>
     <%= f.label t(:expected_result) %><br />
@@ -39,6 +43,7 @@
     支持多个检查点,一行一个检查点
   </div>
   <br />
-  <%= f.submit t("getData_ajax"), class: "btn btn-primary" %>
+  <%= f.submit class: "btn btn-success" %>
   <%= link_to t(:back), posts_path, class: "btn btn-default" %>
+  <%= f.submit t("getData_ajax"), class: "btn btn-primary" %>
 <% end %>
