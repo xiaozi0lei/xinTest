@@ -104,10 +104,12 @@ class PostsController < ApplicationController
 # 转到创建成功页面
           format.html { redirect_to @post, notice: 'Post was successfully created.' }
           format.json { render :show, status: :created, location: @post }
+          format.js { render :layout => false }
         else
 # 创建失败，提示错误信息，重新渲染新建页面，保留输入信息
           format.html { render :new }
           format.json { render json: @post.errors, status: :unprocessable_entity }
+          format.js { render :layout => false, :status => 406 }
         end
       end
     end
