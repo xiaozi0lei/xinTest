@@ -1,7 +1,7 @@
 if ($("#get_response"))
 {
   <% if params[:commit] == "获取数据" %>
-    $("#get_response").remove();
+    $("#getData div").remove();
   <% end %>
   $("<%= escape_javascript(render 'getdata') %>").appendTo("#getData");
 }

@@ -1,5 +1,12 @@
 if ($("#get_response"))
 {
-  $("#get_response").remove();
+  <% if params[:commit] == "获取数据" %>
+    $("#getData div").remove();
+  <% end %>
   $("<%= escape_javascript(render 'getdata') %>").appendTo("#getData");
 }
+<% if @post.errors.empty? %>
+  alert("Successful!");
+<% else %>
+  $('#caseRecord').prepend($('<div class="error-message bg-danger"><%= escape_javascript(@post.errors.full_messages.join("  |  ")) %></pre></div>'));
+<% end %>

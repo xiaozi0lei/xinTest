@@ -1,0 +1,49 @@
+<%= form_for(@post, remote: true) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this get from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label t(:case_title) %><br>
+    <%= f.text_field :title, class: "form-control", readonly: "true" %>
+  </div>
+  <div class="field">
+    <%= f.label t(:project) %><br>
+    <%= select_tag(:project, options_for_select([
+          ['单机SDK', 1], ['网游SDK', 2],
+          ['18183', 3], ['争霸赛', 4],
+          ['IOS SDK', 5], ['百度星玩家', 6],
+          ['oneSDK', 7], ['CRM星玩家', 8],
+          ['百度游戏', 9]
+          ], @post[:project])) %>
+  </div>
+  <div>
+    <%= f.label t(:url) %><br />
+    <%= f.text_area :url, class: "form-control", rows: "3", readonly: "true" %>
+  </div>
+  <div>
+    <%= f.label "参数" %> | 请输入上方网址端口号后的参数<br />
+    http://[URL]:[PORT]/<%= f.text_field :parameter, class: "form-control", readonly: "true" %>
+  </div>
+  <div>
+    <%= f.label t(:data) %><br />
+    <%= f.text_area :data, class: "form-control", rows: "8", readonly: "true" %>
+  </div>
+  <div>
+    <%= f.label t(:expected_result) %><br />
+    <%= f.text_area :result, class: "form-control", rows: "8", readonly: "true" %>
+    支持多个检查点,一行一个检查点
+  </div>
+  <br />
+  <%= link_to 'Edit', edit_post_path(@post),class: "btn btn-success" %>
+  <%= link_to t(:back), posts_path, class: "btn btn-default" %>
+  <%= f.submit t("getData_ajax"), class: "btn btn-primary" %>
+<% end %>

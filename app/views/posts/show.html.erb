@@ -1,29 +1,11 @@
-<p id="notice"><%= notice %></p>
+<h1>Editing post</h1>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<div id="caseRecord" class="col-md-6">
+  <h2><%=t :add_case %></h2>
+  <%= render 'form_show' %>
+</div>
 
-<p>
-  <strong>Project:</strong>
-  <%= @post.project %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <%= @post.url %>
-</p>
-
-<p>
-  <strong>Data:</strong>
-  <%= @post.data %>
-</p>
-
-<p>
-  <strong>Result:</strong>
-  <%= @post.result %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<div id="getData" class="col-md-6">
+  <h2><%=t :get_data %></h2>
+  <%= render 'preview' %>
+</div>

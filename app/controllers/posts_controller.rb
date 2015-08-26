@@ -12,29 +12,30 @@ class PostsController < ApplicationController
     if params[:project].nil?
       @posts = Post.all
     else
-      case params[:project].to_i
-        when 1 then
-          @posts = Post.where(project: "1")
-        when 2 then
-          @posts = Post.where(project: "2")
-        when 3 then 
-          @posts = Post.where(project: "3")
-        when 4 then
-          @posts = Post.where(project: "4")
-        when 5 then
-          @posts = Post.where(project: "5")
-        when 6 then
-          @posts = Post.where(project: "6")
-        when 7 then 
-          @posts = Post.where(project: "7")
-        when 8 then
-          @posts = Post.where(project: "8")
-        when 9 then
-          @posts = Post.where(project: "9")
-      else
-        raise "invalid project"
-      end
-
+      @posts = Post.where(project: "#{params[:project].to_i}").order("title")
+#      case params[:project].to_i
+#        when 1 then
+#          @posts = Post.where(project: "1")
+#        when 2 then
+#          @posts = Post.where(project: "2")
+#        when 3 then 
+#          @posts = Post.where(project: "3")
+#        when 4 then
+#          @posts = Post.where(project: "4")
+#        when 5 then
+#          @posts = Post.where(project: "5")
+#        when 6 then
+#          @posts = Post.where(project: "6")
+#        when 7 then 
+#          @posts = Post.where(project: "7")
+#        when 8 then
+#          @posts = Post.where(project: "8")
+#        when 9 then
+#          binding.pry
+#          @posts = Post.where(project: "9")
+#      else
+#        raise "invalid project"
+#      end
     end
   end
 
@@ -119,6 +120,9 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
 # 对应于编辑界面
   def update
+    if params[:commit] == "Get Data" || params[:commit] == "获取数据"
+      @post = Post.new(post_params)
+    end
     data = @post[:data]
     url = @post[:url]
     case @post[:project].to_i
@@ -162,10 +166,12 @@ class PostsController < ApplicationController
 # 提  示更新成功
           format.html { redirect_to @post, notice: 'Post was successfully updated.' }
           format.json { render :show, status: :ok, location: @post }
+          format.js { render :layout => false }
         else
 # 更  新失败，提示失败原因
           format.html { render :edit }
           format.json { render json: @post.errors, status: :unprocessable_entity }
+          format.js { render :layout => false, :status => 406 }
         end
       end
     end
