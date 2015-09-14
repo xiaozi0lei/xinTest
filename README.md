@@ -21,8 +21,26 @@ web automation test app
   ```bash
   git clone git@github.com:xiaozi0lei/xinTest.git
   ```
+5. 安装postgreSQL
+```sh
+sudo yum install postgresql-server
+sudo yum install postgresql-devel
+```
 
-5. bundle项目所需要的gem包
+6. 初始化数据库 `sudo service postgresql initdb`
+7. 配置本地用户信任
+```sh
+# ubuntu
+sudo vi /etc/postgresql/9.3/main/pg_hba.conf
+# centos
+sudo vi /var/lib/pgsql/data/pg_hba.conf
+```
+
+update the `local   all             postgres                                peer` to `local   all             postgres                                trust`
+6. 启动postgreSQL `sudo service postgresql start`
+7. 创建postgres用户 `echo "ALTER USER postgres WITH PASSWORD 'postgres'" | psql -U postgres`
+
+8. bundle项目所需要的gem包
   ```bash
   cd xinTest
   gem sources --remove https://rubygems.org/
@@ -32,9 +50,6 @@ web automation test app
   bundle install
   ```
 
-6. 安装postgreSQL, 配置本地用户信任`sudo vi /etc/postgresql/9.3/main/pg_hba.conf` update the `local   all             postgres                                peer` to `local   all             postgres                                trust`
-7. 启动postgreSQL `sudo service postgresql restart`
-8. 创建postgres用户 `echo "ALTER USER postgres WITH PASSWORD 'postgres'" | psql -U postgres`
 9. 创建数据库 `rake db:create`
 10. 数据库迁移 `rake db:migrate`
 11. 启动程序 `rails s`
