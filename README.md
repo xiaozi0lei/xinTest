@@ -37,10 +37,9 @@ web automation test app
   ```
 
   update the `local   all             postgres                                peer` to `local   all             postgres                                trust`
-6. 启动postgreSQL `sudo service postgresql start`
-7. 创建postgres用户 `echo "ALTER USER postgres WITH PASSWORD 'postgres'" | psql -U postgres`
+8. 启动postgreSQL `sudo service postgresql start`
 
-8. bundle项目所需要的gem包
+9. bundle项目所需要的gem包
   ```bash
   cd xinTest
   gem sources --remove https://rubygems.org/
@@ -50,9 +49,9 @@ web automation test app
   bundle install
   ```
 
-9. 创建数据库 `rake db:create`
-10. 数据库迁移 `rake db:migrate`
-11. 启动程序 `rails s`
+10. 创建数据库 `rake db:create`
+11. 数据库迁移 `rake db:migrate`
+12. 启动程序 `rails s`
 
 ##docker
 
