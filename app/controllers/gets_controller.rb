@@ -85,7 +85,12 @@ class GetsController < ApplicationController
       @get_url = @get[:url]
 
       @get_url = "http://#{@get[:url]}" unless @get[:url].include? "http"
-
+      begin
+        require 'myhttp'
+        @preview_result = MyHttp.get(@get_url)
+      rescue Exception => e
+        @error = "Error: #{e}"
+      end
       respond_to do |format|
 # ajax异步调用
           format.js {}

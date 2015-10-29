@@ -31,7 +31,6 @@ class PostsController < ApplicationController
 #        when 8 then
 #          @posts = Post.where(project: "8")
 #        when 9 then
-#          binding.pry
 #          @posts = Post.where(project: "9")
 #      else
 #        raise "invalid project"
