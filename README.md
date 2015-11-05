@@ -19,7 +19,7 @@ web automation test app
 3. 安装git
 4. 将github上的xinTest仓库克隆到本地
   ```bash
-  git clone git@github.com:xiaozi0lei/xinTest.git
+  git clone git@gitlab.iduoku.cn:sunguolei/apiTest.git
   ```
 
 5. bundle项目所需要的gem包
