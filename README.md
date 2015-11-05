@@ -1,8 +1,8 @@
-#xinTest
+# xinTest
 
 web automation test app
 
-##Installation
+## Installation
 
 1. 安装rvm, rvm是ruby version manager.到rvm官网安装 http://rvm.io/
 
@@ -39,7 +39,7 @@ web automation test app
 10. 数据库迁移 `rake db:migrate`
 11. 启动程序 `rails s`
 
-##docker
+## docker
 
 1. 启动官方postgreSQL数据库 `docker run --name db -e POSTGRES_PASSWORD=postgres -v /home/docker/db_data:/var/lib/postgresql/data -d postgres`
 2. 启动xinTest应用程序 `docker run --name xintest -it --link db:postgres -p 3000:3000 -d xiaozi0lei/xintest`
@@ -56,6 +56,6 @@ web automation test app
 3. 以后再启动就不需要执行这两步.
 4. 通过 IP:3000 访问xintest即可
 
-##CentOS 安装docker
+## CentOS 安装docker
 http://docs.docker.com/installation/centos/
 
