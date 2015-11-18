@@ -21,7 +21,8 @@
           ['单机SDK', 1], ['网游SDK', 2],
           ['18183', 3], ['争霸赛', 4],
           ['IOS SDK', 5], ['百度星玩家', 6],
-          ['oneSDK', 7], ['CRM星玩家', 8]
+          ['oneSDK', 7], ['CRM星玩家', 8],
+          ['百度游戏', 9]
           ], @post[:project])) %>
   </div>
   <div>
@@ -30,7 +31,7 @@
   </div>
   <div>
     <%= f.label t(:data) %><br />
-    <%= f.text_area :data, class: "form-control", rows: "3" %>
+    <%= f.text_area :data, class: "form-control", rows: "8" %>
   </div>
   <div>
     <%= f.label t(:expected_result) %><br />
@@ -38,7 +39,6 @@
     支持多个检查点,一行一个检查点
   </div>
   <br />
-  <%= f.submit class: "btn btn-success" %>
-  <%= link_to t(:back), posts_path, class: "btn btn-default" %>
   <%= f.submit t("getData_ajax"), class: "btn btn-primary" %>
+  <%= link_to t(:back), posts_path, class: "btn btn-default" %>
 <% end %>

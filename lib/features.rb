@@ -1,5 +1,3 @@
-require 'pry'
-
 class Features
 
   # 先备份，然后将数据插入到cucumber文件中
@@ -33,33 +31,37 @@ class Features
     featureFile.close
   end
   
-    def self.post_create(file, params)
-    # 备份原始文件
-    file_backup(file)
-    # 往文件中写新数据
-    featureFile = File.open(file,"a+")
+  def self.post_create(file, params)
+  # 备份原始文件
+  file_backup(file)
+  # 往文件中写新数据
+  featureFile = File.open(file,"a+")
   
-      # 用例ID
-      id = params[:id]
-      # project
-      project = params[:project]
-      # 处理url前面不带http的url，加上http://
-      if params[:url].include? "http"
-        url = params[:url]
-      else
-        url = "http://#{params[:url]}"
-      end
-      # data
-      data = params[:data]
-      # 将用例中的期望结果处理一下，去掉换行符和空行
-      lines = params[:result]
-      array1 = lines.chomp.split("\r\n")
-      result = []
-      0.upto(array1.length-1) {|x| result[x] = array1[x]}
+    # 用例ID
+    id = params[:id]
+    # title
+    title = params[:title]
+    # project
+    project = params[:project]
+    # parameter
+    parameter = params[:parameter]
+    # 处理url前面不带http的url，加上http://
+    if params[:url].include? "http"
+      url = params[:url]
+    else
+      url = "http://#{params[:url]}"
+    end
+    # data
+    data = params[:data]
+    # 将用例中的期望结果处理一下，去掉换行符和空行
+    lines = params[:result]
+    array1 = lines.chomp.split("\r\n")
+    result = []
+    0.upto(array1.length-1) {|x| result[x] = array1[x]}
   
-      
-      # 往文件中写入新的数据
-      featureFile.puts "      |#{id}|#{project}|#{url}|#{data}|#{result[0]}|#{result[1]}|#{result[2]}|#{result[3]}|#{result[4]}|#{result[5]}|#{result[6]}|#{result[7]}|#{result[8]}|#{result[9]}|"
+    
+    # 往文件中写入新的数据
+    featureFile.puts "      |#{id}|#{title}|#{project}|#{parameter}|#{data}|#{result[0]}|#{result[1]}|#{result[2]}|#{result[3]}|#{result[4]}|#{result[5]}|#{result[6]}|#{result[7]}|#{result[8]}|#{result[9]}|"
   
     # 写完后关闭文件
     featureFile.close
