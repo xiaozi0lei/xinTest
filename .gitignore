@@ -17,12 +17,10 @@
 
 /features/get/*.bak
 /features/post/*.bak
-*.feature
 
 *.bak
 *.swp
 *.out
 *~
-/log/start
 
 /tags

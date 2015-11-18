@@ -12,26 +12,27 @@ class GetsController < ApplicationController
     if params[:project].nil?
       @gets = Get.all
     else
-      case params[:project].to_i
-        when 1 then
-          @gets = Get.where(project: "1")
-        when 2 then
-          @gets = Get.where(project: "2")
-        when 3 then 
-          @gets = Get.where(project: "3")
-        when 4 then
-          @gets = Get.where(project: "4")
-        when 5 then
-          @gets = Get.where(project: "5")
-        when 6 then
-          @gets = Get.where(project: "6")
-        when 7 then 
-          @gets = Get.where(project: "7")
-        when 8 then
-          @gets = Get.where(project: "8")
-      else
-        raise "invalid project"
-      end
+      @gets = Get.where(project: "#{params[:project].to_i}").order("title")
+#      case params[:project].to_i
+#        when 1 then
+#          @gets = Get.where(project: "1")
+#        when 2 then
+#          @gets = Get.where(project: "2")
+#        when 3 then 
+#          @gets = Get.where(project: "3")
+#        when 4 then
+#          @gets = Get.where(project: "4")
+#        when 5 then
+#          @gets = Get.where(project: "5")
+#        when 6 then
+#          @gets = Get.where(project: "6")
+#        when 7 then 
+#          @gets = Get.where(project: "7")
+#        when 8 then
+#          @gets = Get.where(project: "8")
+#      else
+#        raise "invalid project"
+#      end
     end
   end
 
@@ -84,7 +85,12 @@ class GetsController < ApplicationController
       @get_url = @get[:url]
 
       @get_url = "http://#{@get[:url]}" unless @get[:url].include? "http"
-
+      begin
+        require 'myhttp'
+        @preview_result = MyHttp.get(@get_url)
+      rescue Exception => e
+        @error = "Error: #{e}"
+      end
       respond_to do |format|
 # ajax异步调用
           format.js {}
