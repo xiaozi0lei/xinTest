@@ -11,7 +11,7 @@
 
   <% @information.each do |information| %>
     <tr>
-      <td><%= information.title %></td>
+      <td><%= link_to information.title, information_path(information) %></td>
       <td><%= link_to 'Show', information %></td>
       <td><%= link_to 'Edit', edit_information_path(information) %></td>
       <td><%= link_to 'Destroy', information, method: :delete, data: { confirm: 'Are you sure?' } %></td>
