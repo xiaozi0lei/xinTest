@@ -1,0 +1,11 @@
+// Place all the styles related to the information controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// override bootstrap th td padding to 5px
+.blog-post th { border-bottom: 1px solid #DDD; }
+
+.blog-post th, td {
+  padding: 5px
+}
+// override bootstrap th td padding to 5px

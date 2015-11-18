@@ -1,0 +1,23 @@
+<div class="col-md-1">
+</div>
+
+<div class="col-md-10">
+  <p id="notice"><%= notice %></p>
+  
+  <!-- title -->
+  <h2 class="blog-post-title text-center">
+    <%= @information.title %>
+  </h2>
+  <p class="text-center">
+  <%= @information.created_at.strftime("%B %e %k:%M - %Y") %>
+  </p>
+  
+  <%= markdown( @information.description ) %>
+  
+  <br />
+  <%= link_to 'Edit', edit_information_path(@information) %> |
+  <%= link_to 'Back', information_index_path %>
+</div>
+
+<div class="col-md-1">
+</div>
