@@ -4,6 +4,11 @@
   </label>
   <br />
   <pre lang="zh">
+    <p style = "color:red">
+    <% if @error %>
+      <%= @error%>
+    <% end %>
+    </p>
   <%= JSON.pretty_generate(JSON.parse(@preview_result.force_encoding("UTF-8"))) unless @preview_result.nil? %>
   </pre>
 </div>

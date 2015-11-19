@@ -62,13 +62,15 @@ group :development, :test do
   # 断点，调试工具
   gem 'pry'
   gem 'pry-nav'
+  gem 'rb-readline'
 end
-
+group :development, :test do
+  gem 'rspec-rails'
+end
 group :test do
   gem 'cucumber-rails'
   gem 'database_cleaner'
   # rspec TDD测试框架
-  gem 'rspec-rails'
   # Acceptance test framework for web applications
   gem 'capybara'
 end
