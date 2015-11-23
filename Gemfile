@@ -62,7 +62,6 @@ group :development, :test do
   # 断点，调试工具
   gem 'pry'
   gem 'pry-nav'
-  gem 'rb-readline'
 end
 group :development, :test do
   gem 'rspec-rails'
