@@ -1,0 +1,26 @@
+<h2>cid和appid互查</h2>
+
+<div id="cidAppid">
+  <%= form_tag tools_index_path, :remote=> true, :method => "get", :html => { class: "form-horizontal", role: "form" } do %>
+  <div class="form-group">
+    <div class="col-md-2 col-md-offset-1">
+    <%= label :name, "游戏名字" %>
+    <%= text_field_tag :name, params[:name], class: "form-control" %>
+    </div>
+    <div class="col-md-2">
+    <%= label :appId, "appId" %>
+    <%= text_field_tag :appId, params[:appId], class: "form-control" %>
+    </div>
+    <div class="col-md-2">
+    <%= label :cId, "cId" %>
+    <%= text_field_tag :cId, params[:cId], class: "form-control" %>
+    </div>
+
+    <div>
+    <br />
+    <%= submit_tag "Search", class: "btn btn-info" %>
+    </div>
+  </div>
+  <% end %>
+</div>
+
