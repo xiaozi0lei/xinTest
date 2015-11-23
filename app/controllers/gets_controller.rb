@@ -218,7 +218,6 @@ class GetsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
 # 限制参数，只允许需要的参数操作，保证安全
     def get_params
-    binding.pry
       params.require(:get).permit(:title, :url, :result, :project)
     end
 end
