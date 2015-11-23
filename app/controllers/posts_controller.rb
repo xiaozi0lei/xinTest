@@ -1,7 +1,5 @@
-require 'rspec/expectations'
 require 'pry'
 class PostsController < ApplicationController
-  include RSpec::Matchers
 # 在执行方法之前先
 # 1. 查找到对应的get数据
   before_action :set_post, only: [:show, :edit, :update, :destroy]
@@ -91,33 +89,30 @@ class PostsController < ApplicationController
         @preview = AES.get_json_by_post_without_encode(url, data)
       else
         # preview_result只是临时变量，存储测试返回的数据，不入库
-        #@post[:preview_result] = AES.get_json_by_post(url, key, data)
         @preview = AES.get_json_by_post(url, key, data)
       end
       begin
-        #binding.pry
         array = @post[:result].chomp.split("\r\n")
-        @allin = true
+        @wrongmsg = ""
         i = 0
         for i in 0..array.length-1
-          @preview_results = expect(@preview.force_encoding("UTF-8")).to include(array[i])
+          allin = true
+          @preview_results = @preview.force_encoding("UTF-8").include?"#{array[i]}"
           unless @preview_results then
-            @allin = false
+            allin = false
+            @wrongmsg = "#{array[i]} 在返回结果中未匹配到"
             break
           else
             i += 1
           end
         end
-        if @allin then
-          @preview_result = @preview
+        if allin then
+          @wrongmsg = "对比成功"
         end
-       #binding.pry
-       #@preview_result = expect(@preview).to include(@post[:result].chomp)
-
+        @preview_result = @preview
       rescue Exception => e
         @error = "Error: #{e}"
       end
-#@post[:result] = JSON.pretty_generate(JSON.parse(result.force_encoding("UTF-8")))
       respond_to do |format|
         format.js {}
       end
@@ -170,28 +165,30 @@ class PostsController < ApplicationController
       # 利用httparty的post类方法发送加密的data到server
       # 此处的self.class.get调用的是include HTTParty类中的方法post
       if key == "none"
-        @preview_result = AES.get_json_by_post_without_encode(url, data)
+        @preview = AES.get_json_by_post_without_encode(url, data)
       else
         # preview_result只是临时变量，存储测试返回的数据，不入库
-        #@post[:preview_result] = AES.get_json_by_post(url, key, data)
-        @preview_result = AES.get_json_by_post(url, key, data)
+        @preview = AES.get_json_by_post(url, key, data)
       end
       begin
         array = @post[:result].chomp.split("\r\n")
-        @allin = true
+        @wrongmsg = ""
         i = 0
         for i in 0..array.length-1
-          @preview_results = expect(@preview.force_encoding("UTF-8")).to include(array[i])
+          allin = true
+          @preview_results = @preview.force_encoding("UTF-8").include?"#{array[i]}"
           unless @preview_results then
-            @allin = false
+            allin = false
+            @wrongmsg = "#{array[i]} 在返回结果中未匹配到"
             break
           else
             i += 1
           end
         end
-        if @allin then
-          @preview_result = @preview
+        if allin then
+          @wrongmsg = "对比成功"
         end
+        @preview_result = @preview
       rescue Exception => e
         @error = "Error: #{e}"
       end

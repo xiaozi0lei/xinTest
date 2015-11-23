@@ -4,6 +4,9 @@
   </label>
   <br />
   <pre lang="zh">
+    <%= @wrongmsg.force_encoding("UTF-8") unless @wrongmsg.nil? %>
+  </pre>
+  <pre lang="zh">
     <p style = "color:red">
     <% if @error %>
       <%= @error%>

@@ -1,7 +1,5 @@
-require 'rspec/expectations'
 require 'pry'
 class GetsController < ApplicationController
-include RSpec::Matchers
 # 在执行方法之前先
 # 1. 查找到对应的get数据
   before_action :set_get, only: [:show, :edit, :update, :destroy]
@@ -91,20 +89,23 @@ include RSpec::Matchers
         require 'myhttp'
         result = MyHttp.get(@get_url)
         array = @get[:result].chomp.split("\r\n")
-        @allin = true
+        @wrongmsg = ""
         i = 0
         for i in 0..array.length-1
-          @preview_results = expect(result).to include(array[i])
+          allin = true
+          @preview_results = result.include?"#{array[i]}"
           unless @preview_results then
-            @allin = false
+            allin = false
+            @wrongmsg = "#{array[i]} 在返回结果中未匹配到"
             break
           else
             i += 1
           end
         end
-        if @allin then
-          @preview_result = result
+        if allin then
+          @wrongmsg = "对比成功"
         end
+        @preview_result = result
       rescue Exception => e
         @error = "Error: #{e}"
       end
@@ -143,20 +144,23 @@ include RSpec::Matchers
         require 'myhttp'
         result = MyHttp.get(@get_url)
         array = @get[:result].chomp.split("\r\n")
-        @allin = true
+        wrongmsg = ""
         i = 0
         for i in 0..array.length-1
-          @preview_results = expect(result).to include(array[i])
+          @preview_results = result.include?"#{array[i]}"
+          allin = true
           unless @preview_results then
-            @allin = false
+            allin = false
+            @wrongmsg = "#{array[i]} 在返回结果中未匹配到"
             break
           else
             i += 1
           end
         end
-        if @allin then
-          @preview_result = result
+        if allin then
+          @wrongmsg = "对比成功"
         end
+        @preview_result = result
       rescue Exception => e
         @error = "Error: #{e}"
       end
