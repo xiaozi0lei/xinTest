@@ -1,3 +1,4 @@
+require 'pry'
 class GetsController < ApplicationController
 # 在执行方法之前先
 # 1. 查找到对应的get数据
@@ -18,7 +19,7 @@ class GetsController < ApplicationController
 #          @gets = Get.where(project: "1")
 #        when 2 then
 #          @gets = Get.where(project: "2")
-#        when 3 then 
+#        when 3 then
 #          @gets = Get.where(project: "3")
 #        when 4 then
 #          @gets = Get.where(project: "4")
@@ -26,7 +27,7 @@ class GetsController < ApplicationController
 #          @gets = Get.where(project: "5")
 #        when 6 then
 #          @gets = Get.where(project: "6")
-#        when 7 then 
+#        when 7 then
 #          @gets = Get.where(project: "7")
 #        when 8 then
 #          @gets = Get.where(project: "8")
@@ -62,7 +63,7 @@ class GetsController < ApplicationController
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "standalone.feature")
       when 2 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "online.feature")
-      when 3 then 
+      when 3 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "18183.feature")
       when 4 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "comepete.feature")
@@ -70,7 +71,7 @@ class GetsController < ApplicationController
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "ios.feature")
       when 6 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "mobileassistant.feature")
-      when 7 then 
+      when 7 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "onesdk.feature")
       when 8 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "CRM.feature")
@@ -83,11 +84,28 @@ class GetsController < ApplicationController
 # 判断commit参数是否为getData_ajax
     if params[:commit] == "getData_ajax" || params[:commit] == "获取数据"
       @get_url = @get[:url]
-
       @get_url = "http://#{@get[:url]}" unless @get[:url].include? "http"
       begin
         require 'myhttp'
-        @preview_result = MyHttp.get(@get_url)
+        result = MyHttp.get(@get_url)
+        array = @get[:result].chomp.split("\r\n")
+        @wrongmsg = ""
+        i = 0
+        for i in 0..array.length-1
+          allin = true
+          @preview_results = result.include?"#{array[i]}"
+          unless @preview_results then
+            allin = false
+            @wrongmsg = "#{array[i]} 在返回结果中未匹配到"
+            break
+          else
+            i += 1
+          end
+        end
+        if allin then
+          @wrongmsg = "对比成功"
+        end
+        @preview_result = result
       rescue Exception => e
         @error = "Error: #{e}"
       end
@@ -122,6 +140,30 @@ class GetsController < ApplicationController
 
       @get_url = params[:get][:url]
       @get_url = "http://#{params[:get][:url]}" unless params[:get][:url].include? "http"
+      begin
+        require 'myhttp'
+        result = MyHttp.get(@get_url)
+        array = @get[:result].chomp.split("\r\n")
+        wrongmsg = ""
+        i = 0
+        for i in 0..array.length-1
+          @preview_results = result.include?"#{array[i]}"
+          allin = true
+          unless @preview_results then
+            allin = false
+            @wrongmsg = "#{array[i]} 在返回结果中未匹配到"
+            break
+          else
+            i += 1
+          end
+        end
+        if allin then
+          @wrongmsg = "对比成功"
+        end
+        @preview_result = result
+      rescue Exception => e
+        @error = "Error: #{e}"
+      end
 
       respond_to do |format|
 # ajax异步调用
@@ -137,7 +179,7 @@ class GetsController < ApplicationController
               @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "standalone.feature")
             when 2 then
               @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "online.feature")
-            when 3 then 
+            when 3 then
               @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "18183.feature")
             when 4 then
               @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "compete.feature")
@@ -145,7 +187,7 @@ class GetsController < ApplicationController
               @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "ios.feature")
             when 6 then
               @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "mobileassistant.feature")
-            when 7 then 
+            when 7 then
               @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "onesdk.feature")
             when 8 then
               @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "CRM.feature")
@@ -180,7 +222,7 @@ class GetsController < ApplicationController
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "standalone.feature")
       when 2 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "online.feature")
-      when 3 then 
+      when 3 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "18183.feature")
       when 4 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "compete.feature")
@@ -188,7 +230,7 @@ class GetsController < ApplicationController
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "ios.feature")
       when 6 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "mobileassistant.feature")
-      when 7 then 
+      when 7 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "onesdk.feature")
       when 8 then
         @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "get", "CRM.feature")

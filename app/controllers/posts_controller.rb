@@ -1,3 +1,4 @@
+require 'pry'
 class PostsController < ApplicationController
 # 在执行方法之前先
 # 1. 查找到对应的get数据
@@ -18,7 +19,7 @@ class PostsController < ApplicationController
 #          @posts = Post.where(project: "1")
 #        when 2 then
 #          @posts = Post.where(project: "2")
-#        when 3 then 
+#        when 3 then
 #          @posts = Post.where(project: "3")
 #        when 4 then
 #          @posts = Post.where(project: "4")
@@ -26,7 +27,7 @@ class PostsController < ApplicationController
 #          @posts = Post.where(project: "5")
 #        when 6 then
 #          @posts = Post.where(project: "6")
-#        when 7 then 
+#        when 7 then
 #          @posts = Post.where(project: "7")
 #        when 8 then
 #          @posts = Post.where(project: "8")
@@ -84,14 +85,34 @@ class PostsController < ApplicationController
       # 此处实现AES/ECB/pkcs5padding加密，Base64编码
       # 利用httparty的post类方法发送加密的data到server
       # 此处的self.class.get调用的是include HTTParty类中的方法post
-      if key == "none" 
-        @preview_result = AES.get_json_by_post_without_encode(url, data)
+      if key == "none"
+        @preview = AES.get_json_by_post_without_encode(url, data)
       else
         # preview_result只是临时变量，存储测试返回的数据，不入库
-        #@post[:preview_result] = AES.get_json_by_post(url, key, data)
-        @preview_result = AES.get_json_by_post(url, key, data)
+        @preview = AES.get_json_by_post(url, key, data)
       end
-#@post[:result] = JSON.pretty_generate(JSON.parse(result.force_encoding("UTF-8")))
+      begin
+        array = @post[:result].chomp.split("\r\n")
+        @wrongmsg = ""
+        i = 0
+        for i in 0..array.length-1
+          allin = true
+          @preview_results = @preview.force_encoding("UTF-8").include?"#{array[i]}"
+          unless @preview_results then
+            allin = false
+            @wrongmsg = "#{array[i]} 在返回结果中未匹配到"
+            break
+          else
+            i += 1
+          end
+        end
+        if allin then
+          @wrongmsg = "对比成功"
+        end
+        @preview_result = @preview
+      rescue Exception => e
+        @error = "Error: #{e}"
+      end
       respond_to do |format|
         format.js {}
       end
@@ -143,13 +164,35 @@ class PostsController < ApplicationController
       # 此处实现AES/ECB/pkcs5padding加密，Base64编码
       # 利用httparty的post类方法发送加密的data到server
       # 此处的self.class.get调用的是include HTTParty类中的方法post
-      if key == "none" 
-        @preview_result = AES.get_json_by_post_without_encode(url, data)
+      if key == "none"
+        @preview = AES.get_json_by_post_without_encode(url, data)
       else
         # preview_result只是临时变量，存储测试返回的数据，不入库
-        #@post[:preview_result] = AES.get_json_by_post(url, key, data)
-        @preview_result = AES.get_json_by_post(url, key, data)
+        @preview = AES.get_json_by_post(url, key, data)
       end
+      begin
+        array = @post[:result].chomp.split("\r\n")
+        @wrongmsg = ""
+        i = 0
+        for i in 0..array.length-1
+          allin = true
+          @preview_results = @preview.force_encoding("UTF-8").include?"#{array[i]}"
+          unless @preview_results then
+            allin = false
+            @wrongmsg = "#{array[i]} 在返回结果中未匹配到"
+            break
+          else
+            i += 1
+          end
+        end
+        if allin then
+          @wrongmsg = "对比成功"
+        end
+        @preview_result = @preview
+      rescue Exception => e
+        @error = "Error: #{e}"
+      end
+
 #@post[:result] = JSON.pretty_generate(JSON.parse(result.force_encoding("UTF-8")))
       respond_to do |format|
         format.js {}
@@ -207,14 +250,14 @@ class PostsController < ApplicationController
         when 1 then
           @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "standalone.feature")
         when 2 then
-          @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "online.feature")  
+          @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "online.feature")
         when 3 then
           @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "18183.feature")
         when 4 then
           @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "compete.feature")
         when 5 then
           @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "ios.feature")
-        when 6 then 
+        when 6 then
           @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "mobileassistant.feature")
         when 7 then
           @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "onesdk.feature")
@@ -222,7 +265,7 @@ class PostsController < ApplicationController
           @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "CRM.feature")
         when 9 then
           @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "baidu_game.feature")
-        else  
+        else
           raise "invalid project"
       end
     end

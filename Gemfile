@@ -63,12 +63,13 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
 end
-
+group :development, :test do
+  gem 'rspec-rails'
+end
 group :test do
   gem 'cucumber-rails'
   gem 'database_cleaner'
   # rspec TDD测试框架
-  gem 'rspec-rails'
   # Acceptance test framework for web applications
   gem 'capybara'
 end
