@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'tools/index'
+
   resources :information
 
   root 'welcome#index'
