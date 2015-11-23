@@ -3,16 +3,22 @@ require 'logger'
 
 class ToolsController < ApplicationController
   def index
-    if params[:commit] == "Search"
-
     # initial logger
     logger = Logger.new(STDOUT)
-    
+
+    case params[:commit]
+    when "Search cid_appid" then
+      search_cid_appid
+    else
+    end
+  end
+
+  def search_cid_appid
     # assign the value of front end to variables
     front_name = params[:name]
     front_appId = params[:appId]
     front_cId = params[:cId]
-# handle the empty value for the variables
+    # handle the empty value for the variables
     front_name = nil if front_name.empty?
     front_appId = nil if front_appId.empty?
     front_cId = nil if front_cId.empty?
@@ -149,9 +155,6 @@ class ToolsController < ApplicationController
     end
     respond_to do |format|
       format.js {}
-    end
-# 记得缩进
-    else
     end
   end
 
