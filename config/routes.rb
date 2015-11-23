@@ -12,8 +12,6 @@ Rails.application.routes.draw do
   get 'posts/test'
   resources :posts
 
-  get 'tools/cid_map_appid'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
