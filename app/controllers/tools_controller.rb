@@ -4,7 +4,6 @@ class ToolsController < ApplicationController
   def index
     # initial logger
     logger = Logger.new(STDOUT)
-    @commit = params[:commit]
     case params[:commit]
       when "Search cid_appid" then
         search_cid_appid
