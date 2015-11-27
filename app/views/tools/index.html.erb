@@ -1,5 +1,4 @@
 <h2>cid和appid互查</h2>
-
 <div id="cid_appid">
   <%= form_tag tools_index_path, :remote=> true, :method => "get", :html => { class: "form-horizontal", role: "form" } do %>
   <div class="form-group">
@@ -21,6 +20,26 @@
     <%= submit_tag "Search cid_appid", class: "btn btn-info" %>
     </div>
   </div>
+  <% end %>
+</div>
+
+<div id="name_id">
+  <%= form_tag tools_index_path, :remote=> true, :method => "get", :html => { class: "form-horizontal", role: "form" } do %>
+    <div class="form-group">
+      <div class="col-md-2 col-md-offset-1">
+        <%= label :name, "用户名" %>
+        <%= text_field_tag :user_name, params[:user_name], class: "form-control" %>
+      </div>
+      <div class="col-md-2">
+        <%= label :appId, "百度用户名" %>
+        <%= text_field_tag :baidu_name, params[:baidu_name], class: "form-control" %>
+      </div>
+
+      <div>
+        <br />
+        <%= submit_tag "Search name_id", class: "btn btn-info" %>
+      </div>
+    </div>
   <% end %>
 </div>
 
