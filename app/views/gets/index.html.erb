@@ -2,30 +2,37 @@
 </div>
 
 <div class="col-md-10">
-<h2>Get <%=t :case_list %></h2>
+  <h2>Get <%= t :case_list %></h2>
 
- <%= link_to t(:new_case), new_get_path, class: "btn btn-primary" %> 
-| <%= link_to '单机SDK', gets_path(:project => 1) %>
-| <%= link_to '网游SDK', gets_path(:project => 2) %> | <%= link_to '18183', gets_path(:project => 3) %>
-| <%= link_to '争霸赛', gets_path(:project => 4) %> | <%= link_to 'iOS SDK', gets_path(:project => 5) %> 
-| <%= link_to '百度星玩家', gets_path(:project => 6) %> | <%= link_to 'onesdk', gets_path(:project => 7) %>
-| <%= link_to 'CRM星玩家', gets_path(:project => 8) %> | <br /><br />
+  <%= link_to t(:new_case), new_get_path, class: "btn btn-primary" %>
+  | <%= link_to '单机SDK', gets_path(:project => 1) %>
+  | <%= link_to '网游SDK', gets_path(:project => 2) %> | <%= link_to '18183', gets_path(:project => 3) %>
+  | <%= link_to '争霸赛', gets_path(:project => 4) %> | <%= link_to 'iOS SDK', gets_path(:project => 5) %>
+  | <%= link_to '百度星玩家', gets_path(:project => 6) %> | <%= link_to 'onesdk', gets_path(:project => 7) %>
+  | <%= link_to 'CRM星玩家', gets_path(:project => 8) %> | <br/><br/>
 
-<table class="table">
+
+  <table class="table">
     <tr>
-      <th><%=t :case_title %></th>
+      <th><%= t :case_title %></th>
       <th colspan="3"></th>
     </tr>
 
+
+
     <% @gets.each do |get| %>
-      <tr>
-        <td><b><%= link_to get.title, get_path(get) %></b></td>
-        <td class="text-right"><%= link_to t(:show), get %></td>
-        <td class="text-center"><%= link_to t(:edit), edit_get_path(get) %></td>
-        <td><%= link_to t(:destroy), get, method: :delete, data: { confirm: t(:are_you_sure) } %></td>
-      </tr>
+        <tr>
+          <td><b><%= link_to get.title, get_path(get) %></b></td>
+          <td class="text-right"><%= link_to t(:show), get %></td>
+          <td class="text-center"><%= link_to t(:edit), edit_get_path(get) %></td>
+          <td><%= link_to t(:destroy), get, method: :delete, data: {confirm: t(:are_you_sure)} %></td>
+        </tr>
     <% end %>
-</table>
+
+  </table>
+  <div style="text-align: center">
+    <%= will_paginate @gets, :container => false %>
+  </div>
 
 </div>
 

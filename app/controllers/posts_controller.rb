@@ -12,6 +12,8 @@ class PostsController < ApplicationController
   def index
     if params[:project].nil?
       @posts = Post.all
+      @posts = Post.paginate :page => params[:page],
+                           :per_page => 10
     else
       @posts = Post.where(project: "#{params[:project].to_i}").order("title")
 #      case params[:project].to_i
@@ -92,7 +94,7 @@ class PostsController < ApplicationController
         @preview = AES.get_json_by_post(url, key, data)
       end
       begin
-        array = @post[:result].chomp.split("\r\n")
+        array = @post[:result].gsub(' ','').chomp.split("\r\n")
         @wrongmsg = ""
         i = 0
         for i in 0..array.length-1
@@ -171,7 +173,7 @@ class PostsController < ApplicationController
         @preview = AES.get_json_by_post(url, key, data)
       end
       begin
-        array = @post[:result].chomp.split("\r\n")
+        array = @post[:result].gsub(' ','').chomp.split("\r\n")
         @wrongmsg = ""
         i = 0
         for i in 0..array.length-1

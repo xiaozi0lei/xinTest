@@ -1,30 +1,33 @@
 <div class="col-md-1">
 </div>
 <div class="col-md-10">
-<h2>Post <%=t :case_list %></h2>
+  <h2>Post <%= t :case_list %></h2>
 
- <%= link_to t(:new_case), new_post_path, class: "btn btn-primary" %>
-| <%= link_to '单机SDK', posts_path(:project => 1) %>
-| <%= link_to '网游SDK', posts_path(:project => 2) %> | <%= link_to '18183', posts_path(:project => 3) %>
-| <%= link_to '争霸赛', posts_path(:project => 4) %> | <%= link_to 'iOS SDK', posts_path(:project => 5) %> 
-| <%= link_to '百度星玩家', posts_path(:project => 6) %> | <%= link_to 'oneSDK', posts_path(:project => 7) %>
-| <%= link_to 'CRM星玩家', posts_path(:project => 8) %> | <%= link_to '百度游戏', posts_path(:project => 9) %> | <br /><br />
+  <%= link_to t(:new_case), new_post_path, class: "btn btn-primary" %>
+  | <%= link_to '单机SDK', posts_path(:project => 1) %>
+  | <%= link_to '网游SDK', posts_path(:project => 2) %> | <%= link_to '18183', posts_path(:project => 3) %>
+  | <%= link_to '争霸赛', posts_path(:project => 4) %> | <%= link_to 'iOS SDK', posts_path(:project => 5) %>
+  | <%= link_to '百度星玩家', posts_path(:project => 6) %> | <%= link_to 'oneSDK', posts_path(:project => 7) %>
+  | <%= link_to 'CRM星玩家', posts_path(:project => 8) %> | <%= link_to '百度游戏', posts_path(:project => 9) %> | <br/><br/>
 
-<table class="table">
+  <table class="table">
     <tr>
-      <th><%=t :case_title %></th>
+      <th><%= t :case_title %></th>
       <th colspan="3"></th>
     </tr>
 
     <% @posts.each do |post| %>
-      <tr>
-        <td><b><%= link_to post.title, post_path(post) %></b></td>
-        <td class="text-right"><%= link_to t(:show), post %></td>
-        <td class="text-center"><%= link_to t(:edit), edit_post_path(post) %></td>
-        <td><%= link_to t(:destroy), post, method: :delete, data: { confirm: t(:are_you_sure) } %></td>
-      </tr>
+        <tr>
+          <td><b><%= link_to post.title, post_path(post) %></b></td>
+          <td class="text-right"><%= link_to t(:show), post %></td>
+          <td class="text-center"><%= link_to t(:edit), edit_post_path(post) %></td>
+          <td><%= link_to t(:destroy), post, method: :delete, data: {confirm: t(:are_you_sure)} %></td>
+        </tr>
     <% end %>
-</table>
+  </table>
+  <div style="text-align: center">
+    <%= will_paginate @gets, :container => false %>
+  </div>
 
 </div>
 

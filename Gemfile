@@ -42,6 +42,7 @@ gem 'spring',        group: :development
 # mysql gem for the testing tools to search mysql database
 gem 'mysql2'
 
+gem 'will_paginate'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

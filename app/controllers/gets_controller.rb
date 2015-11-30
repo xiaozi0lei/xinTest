@@ -11,7 +11,8 @@ class GetsController < ApplicationController
 # 对应于前台的"get用例列表"
   def index
     if params[:project].nil?
-      @gets = Get.all
+      @gets = Get.paginate :page => params[:page],
+                           :per_page => 10
     else
       @gets = Get.where(project: "#{params[:project].to_i}").order("title")
 #      case params[:project].to_i
@@ -88,7 +89,7 @@ class GetsController < ApplicationController
       begin
         require 'myhttp'
         result = MyHttp.get(@get_url)
-        array = @get[:result].chomp.split("\r\n")
+        array = @get[:result].gsub(' ','').chomp.split("\r\n")
         @wrongmsg = ""
         i = 0
         for i in 0..array.length-1
@@ -137,13 +138,12 @@ class GetsController < ApplicationController
 # 对应于编辑界面
   def update
     if params[:commit] == "getData_ajax" || params[:commit] == "获取数据"
-
       @get_url = params[:get][:url]
       @get_url = "http://#{params[:get][:url]}" unless params[:get][:url].include? "http"
       begin
         require 'myhttp'
         result = MyHttp.get(@get_url)
-        array = @get[:result].chomp.split("\r\n")
+        array = params[:result].gsub(' ','').chomp.split("\r\n")
         wrongmsg = ""
         i = 0
         for i in 0..array.length-1
