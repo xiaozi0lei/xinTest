@@ -35,15 +35,33 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li class="active"><%= link_to t(:main_page), "/" %></li>
-          <li><%= link_to 'Get用例列表', gets_path %></li>
-          <li><%= link_to '新建Get用例', new_get_path %></li>
-          <li><%= link_to 'Post用例列表', posts_path %></li>
-          <li><%= link_to 'Post测试', posts_test_path %></li>
-          <li><%= link_to '新建Post用例', new_post_path %></li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" aria-expanded="true" aria-haspopup="true" role="button" data-toggle="dropdown" href="#">
+              用例列表
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'Get用例列表', gets_path %></li>
+              <li><%= link_to 'Post用例列表', posts_path %></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" aria-expanded="true" aria-haspopup="true" role="button" data-toggle="dropdown" href="#">
+              新建用例
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to '新建Get用例', new_get_path %></li>
+              <li><%= link_to '新建Post用例', new_post_path %></li>
+              <li><%= link_to 'Post测试', posts_test_path %></li>
+            </ul>
+          </li>
+
           <li><%= link_to '测试组信息', information_index_path %></li>
           <li><%= link_to '测试工具', tools_index_path %></li>
         </ul>
-        <!-- sign in and sign up 登陆和注册 -->
 
       </div><!--/.navbar-collapse -->
     </div><!-- /.container -->
