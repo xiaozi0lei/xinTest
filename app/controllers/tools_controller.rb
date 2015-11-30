@@ -164,7 +164,7 @@ class ToolsController < ApplicationController
     user_name = nil if user_name.empty?
     baidu_name = nil if baidu_name.empty?
     if !user_name.nil? or !baidu_name.nil?
-      client = Mysql2::Client.new(:host => '10.10.0.207', :username => 'reader', :password => 'duoku2012', :database => 'mcp_user', :port => 3307)
+      client = Mysql2::Client.new(:host => '10.10.1.210', :username => 'reader', :password => 'duoku2012', :database => 'mcp_user', :port => 3306)
       if !user_name.nil?
         result = client.query("select User_Id,User_ThirdId from mcp_user_info where User_Name = '#{user_name}' limit 1")
         if !result.first.nil?
