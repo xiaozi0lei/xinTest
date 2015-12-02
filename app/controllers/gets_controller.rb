@@ -152,9 +152,7 @@ class GetsController < ApplicationController
       begin
         require 'myhttp'
         result = MyHttp.get(@get_url)
-        binding.pry
         array = params[:result].gsub(' ','').chomp.split("\r\n")
-        wrongmsg = ""
         i = 0
         for i in 0..array.length-1
           @preview_results = result.include?"#{array[i]}"
