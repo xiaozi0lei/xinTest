@@ -15,7 +15,8 @@ class PostsController < ApplicationController
       @posts = Post.paginate :page => params[:page],
                            :per_page => 10
     else
-      @posts = Post.where(project: "#{params[:project].to_i}").order("title")
+      @posts = Post.where(project: "#{params[:project].to_i}").order("title").paginate :page => params[:page],
+                                                                                       :per_page => 10
 #      case params[:project].to_i
 #        when 1 then
 #          @posts = Post.where(project: "1")
