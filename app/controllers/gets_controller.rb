@@ -145,7 +145,6 @@ class GetsController < ApplicationController
         result = MyHttp.get(@get_url)
         array = @get[:result].gsub(' ','').chomp.split("\r\n")
         allin = false
-        binding.pry
         array.each do |line|
           @preview_results = result.include?"#{line}"
           allin = true
