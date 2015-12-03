@@ -15,7 +15,8 @@ class PostsController < ApplicationController
       @posts = Post.paginate :page => params[:page],
                            :per_page => 10
     else
-      @posts = Post.where(project: "#{params[:project].to_i}").order("title")
+      @posts = Post.where(project: "#{params[:project].to_i}").order("title").paginate :page => params[:page],
+                                                                                       :per_page => 10
 #      case params[:project].to_i
 #        when 1 then
 #          @posts = Post.where(project: "1")
@@ -96,16 +97,14 @@ class PostsController < ApplicationController
       begin
         array = @post[:result].gsub(' ','').chomp.split("\r\n")
         @wrongmsg = ""
-        i = 0
-        for i in 0..array.length-1
+        allin = false
+        array.each do |line|
           allin = true
-          @preview_results = @preview.force_encoding("UTF-8").include?"#{array[i]}"
+          @preview_results = @preview.force_encoding("UTF-8").include?"#{line}"
           unless @preview_results then
             allin = false
-            @wrongmsg = "#{array[i]} 在返回结果中未匹配到"
+            @wrongmsg = "#{line} 在返回结果中未匹配到"
             break
-          else
-            i += 1
           end
         end
         if allin then
@@ -175,16 +174,14 @@ class PostsController < ApplicationController
       begin
         array = @post[:result].gsub(' ','').chomp.split("\r\n")
         @wrongmsg = ""
-        i = 0
-        for i in 0..array.length-1
+        allin = false
+        array.each do |line|
           allin = true
-          @preview_results = @preview.force_encoding("UTF-8").include?"#{array[i]}"
+          @preview_results = @preview.force_encoding("UTF-8").include?"#{line}"
           unless @preview_results then
             allin = false
-            @wrongmsg = "#{array[i]} 在返回结果中未匹配到"
+            @wrongmsg = "#{line} 在返回结果中未匹配到"
             break
-          else
-            i += 1
           end
         end
         if allin then
@@ -194,8 +191,6 @@ class PostsController < ApplicationController
       rescue Exception => e
         @error = "Error: #{e}"
       end
-
-#@post[:result] = JSON.pretty_generate(JSON.parse(result.force_encoding("UTF-8")))
       respond_to do |format|
         format.js {}
       end

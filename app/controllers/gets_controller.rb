@@ -14,7 +14,8 @@ class GetsController < ApplicationController
       @gets = Get.paginate :page => params[:page],
                            :per_page => 10
     else
-      @gets = Get.where(project: "#{params[:project].to_i}").order("title")
+      @gets = Get.where(project: "#{params[:project].to_i}").order("title").paginate :page => params[:page],
+                                                                                     :per_page => 10
 #      case params[:project].to_i
 #        when 1 then
 #          @gets = Get.where(project: "1")
@@ -91,16 +92,14 @@ class GetsController < ApplicationController
         result = MyHttp.get(@get_url)
         array = @get[:result].gsub(' ','').chomp.split("\r\n")
         @wrongmsg = ""
-        i = 0
-        for i in 0..array.length-1
+        allin = false
+        array.each do |line|
           allin = true
-          @preview_results = result.include?"#{array[i]}"
+          @preview_results = result.include?"#{line}"
           unless @preview_results then
             allin = false
-            @wrongmsg = "#{array[i]} 在返回结果中未匹配到"
+            @wrongmsg = "#{line} 在返回结果中未匹配到"
             break
-          else
-            i += 1
           end
         end
         if allin then
@@ -138,23 +137,21 @@ class GetsController < ApplicationController
 # 对应于编辑界面
   def update
     if params[:commit] == "getData_ajax" || params[:commit] == "获取数据"
-      @get_url = params[:get][:url]
-      @get_url = "http://#{params[:get][:url]}" unless params[:get][:url].include? "http"
+      @get = Get.new(get_params)
+      @get_url = @get[:url]
+      @get_url = "http://#{@get[:url]}" unless @get[:url].include? "http"
       begin
         require 'myhttp'
         result = MyHttp.get(@get_url)
-        array = params[:result].gsub(' ','').chomp.split("\r\n")
-        wrongmsg = ""
-        i = 0
-        for i in 0..array.length-1
-          @preview_results = result.include?"#{array[i]}"
+        array = @get[:result].gsub(' ','').chomp.split("\r\n")
+        allin = false
+        array.each do |line|
+          @preview_results = result.include?"#{line}"
           allin = true
           unless @preview_results then
             allin = false
-            @wrongmsg = "#{array[i]} 在返回结果中未匹配到"
+            @wrongmsg = "#{line} 在返回结果中未匹配到"
             break
-          else
-            i += 1
           end
         end
         if allin then
