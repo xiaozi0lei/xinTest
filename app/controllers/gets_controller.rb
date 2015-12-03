@@ -23,13 +23,6 @@ class GetsController < ApplicationController
 #          @gets = Get.where(project: "2")
 #        when 3 then
 #          @gets = Get.where(project: "3")
-
-
-
-
-
-
-
 #        when 4 then
 #          @gets = Get.where(project: "4")
 #        when 5 then
@@ -99,16 +92,14 @@ class GetsController < ApplicationController
         result = MyHttp.get(@get_url)
         array = @get[:result].gsub(' ','').chomp.split("\r\n")
         @wrongmsg = ""
-        i = 0
-        for i in 0..array.length-1
+        allin = false
+        array.each do |line|
           allin = true
-          @preview_results = result.include?"#{array[i]}"
+          @preview_results = result.include?"#{line}"
           unless @preview_results then
             allin = false
-            @wrongmsg = "#{array[i]} 在返回结果中未匹配到"
+            @wrongmsg = "#{line} 在返回结果中未匹配到"
             break
-          else
-            i += 1
           end
         end
         if allin then
@@ -152,17 +143,16 @@ class GetsController < ApplicationController
       begin
         require 'myhttp'
         result = MyHttp.get(@get_url)
-        array = params[:result].gsub(' ','').chomp.split("\r\n")
-        i = 0
-        for i in 0..array.length-1
-          @preview_results = result.include?"#{array[i]}"
+        array = @get[:result].gsub(' ','').chomp.split("\r\n")
+        allin = false
+        binding.pry
+        array.each do |line|
+          @preview_results = result.include?"#{line}"
           allin = true
           unless @preview_results then
             allin = false
-            @wrongmsg = "#{array[i]} 在返回结果中未匹配到"
+            @wrongmsg = "#{line} 在返回结果中未匹配到"
             break
-          else
-            i += 1
           end
         end
         if allin then
