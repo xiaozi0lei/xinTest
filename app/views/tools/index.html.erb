@@ -1,4 +1,6 @@
-<h2>cid和appid互查</h2>
+<h2 id="tools_title" style="text-align: center;">测试工具</h2>
+
+<h3>cid和appid互查</h3>
 <div id="cid_appid">
   <%= form_tag tools_index_path, :remote=> true, :method => "get", :html => { class: "form-horizontal", role: "form" } do %>
   <div class="form-group">
@@ -23,6 +25,7 @@
   <% end %>
 </div>
 
+<h3>用户名和ID互查</h3>
 <div id="name_id">
   <%= form_tag tools_index_path, :remote=> true, :method => "get", :html => { class: "form-horizontal", role: "form" } do %>
     <div class="form-group">
