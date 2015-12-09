@@ -31,7 +31,7 @@ class ToolsController < ApplicationController
     # if name or appId have values
     if !front_name.nil? or !front_appId.nil?
       client = Mysql2::Client.new(:host => '10.10.1.115', :username => 'pubDbReader', :password => 'mGame2ReadOnly', :database => 'gamedev', :port => 5051)
-    # find the back_appId and back_cId by name
+      # find the back_appId and back_cId by name
       if !front_name.nil?
         results = client.query("select app_id, id from pt_game_basic_info where name = '#{front_name}'")
         if results.first.nil?
@@ -42,7 +42,7 @@ class ToolsController < ApplicationController
           return
         else
           colorYellow
-          back_appId = results.map do | result |
+          back_appId = results.map do |result|
             result["app_id"]
           end
           @front_appId = back_appId
@@ -50,50 +50,58 @@ class ToolsController < ApplicationController
           back_name = front_name
           @front_name = back_name
           logger.info "table pt_game_basic_info => name = #{back_name}"
-    # game_id for pt_game_apk_package_info table search
+          # game_id for pt_game_apk_package_info table search
           game_id = results.map do |result|
             result["id"]
           end
           logger.info "table pt_game_basic_info => id = #{game_id}"
           colorNormal
         end
-        # game_id not equal 1, need to search multi items
-        if game_id.size != 1
-          # search the package name by game id
-          results = client.query("select package_name from pt_game_apk_package_info where game_id = #{game_id.first} OR game_id = #{game_id.second}")
-      
-          if results.first.nil?
-            colorRed
-            @error_message = "table pt_game_apk_package_info => package_name不存在"
-            logger.error "package_name不存在"
-            colorNormal
-            return
-          else
-            package_name = results.map do |package|
-              package["package_name"]
-            end
-          end
-      
-          # connect the MCP database
-          client2 = Mysql2::Client.new(:host => '10.10.1.115', :username => 'pubDbReader', :password => 'mGame2ReadOnly', :database => 'MCP', :port => 5051)
-          results = client2.query("select cid from bmh_info where packagename = '#{package_name.first}' OR packagename = '#{package_name.second}'")
-      
-          if results.first.nil?
-            colorRed
-            @error_message = "cid不存在"
-            logger.error "cid不存在"
-            colorNormal
-            return
-          else
-            back_cId = results.map do |result|
-              result["cid"]
-            end
-            colorYellow
-            logger.info "table bmh_info => cid = #{back_cId}"
-            @front_cId = back_cId
-            colorNormal
-          end
+        # search the package name by game id
+        results = game_id.map do |line|
+          client.query("select package_name from pt_game_apk_package_info where game_id = #{line}")
         end
+        if results.first.nil?
+          colorRed
+          @error_message = "table pt_game_apk_package_info => package_name不存在"
+          logger.error "package_name不存在"
+          colorNormal
+          return
+        else
+          package_name = results.map do |package|
+            if package.first.nil?
+              colorRed
+              logger.error "有game_id没有对应packagename"
+              colorNormal
+            else
+              package.first["package_name"]
+            end
+
+          end
+          package_name = package_name.compact
+
+        end
+        # connect the MCP database
+        client2 = Mysql2::Client.new(:host => '10.10.1.115', :username => 'pubDbReader', :password => 'mGame2ReadOnly', :database => 'MCP', :port => 5051)
+        results = package_name.map do |line|
+          client2.query("select cid from bmh_info where packagename = '#{line}'")
+        end
+        if results.first.nil?
+          colorRed
+          @error_message = "cid不存在"
+          logger.error "cid不存在"
+          colorNormal
+          return
+        else
+          back_cId = results.map do |result|
+            result.first["cid"]
+          end
+          colorYellow
+          logger.info "table bmh_info => cid = #{back_cId}"
+          @front_cId = back_cId
+          colorNormal
+        end
+
       else
         results = client.query("select name,id from pt_game_basic_info where app_id = #{front_appId}")
         if results.first.nil?
@@ -116,46 +124,13 @@ class ToolsController < ApplicationController
           colorNormal
         end
       end
-
-      if game_id.size == 1
-        # search the package name by game id
-        results = client.query("select package_name from pt_game_apk_package_info where game_id = #{game_id}")
-  
-        if results.first.nil?
-          colorRed
-          @error_message = "package_name不存在"
-          logger.error "package_name不存在"
-          colorNormal
-          return
-        else
-          package_name = results.first["package_name"]
-        end
-  
-        # connect the MCP database
-        client2 = Mysql2::Client.new(:host => '10.10.1.115', :username => 'pubDbReader', :password => 'mGame2ReadOnly', :database => 'MCP', :port => 5051)
-        results = client2.query("select cid from bmh_info where packagename = '#{package_name}'")
-  
-        if results.first.nil?
-          colorRed
-          @error_message = "cid不存在"
-          logger.error "cid不存在"
-          colorNormal
-          return
-        else
-          back_cId = results.first["cid"]
-          colorYellow
-          logger.info "table bmh_info => cid = #{back_cId}"
-          @front_cId = back_cId
-          colorNormal
-        end
-      end
-    # close the mysql connection
+      # close the mysql connection
       client.close
-    # close the mysql connection
+      # close the mysql connection
       client2.close
-    # if cid has value
+      # if cid has value
     elsif !front_cId.nil?
-    # connect the MCP database
+      # connect the MCP database
       client_cid = Mysql2::Client.new(:host => '10.10.1.115', :username => 'pubDbReader', :password => 'mGame2ReadOnly', :database => 'MCP', :port => 5051)
       results = client_cid.query("select packagename from bmh_info where cid = '#{front_cId}'")
 
@@ -171,11 +146,11 @@ class ToolsController < ApplicationController
         logger.info "table bmh_info => packagename = #{packagename}"
         colorNormal
       end
-    # close the mysql connection
+      # close the mysql connection
       client_cid.close
 
       client_cid2 = Mysql2::Client.new(:host => '10.10.1.115', :username => 'pubDbReader', :password => 'mGame2ReadOnly', :database => 'gamedev', :port => 5051)
-    # search the package name by game id
+      # search the package name by game id
       results = client_cid2.query("select game_id from pt_game_apk_package_info where package_name = '#{packagename}'")
 
       if results.first.nil?
@@ -208,10 +183,10 @@ class ToolsController < ApplicationController
         logger.info "table bmh_info => cid = #{back_cId}"
         colorNormal
       end
-    # close the mysql connection
+      # close the mysql connection
       client_cid2.close
     else
-    # no input value
+      # no input value
       colorYellow
       logger.info "请提供name，cId，或者appId"
       colorNormal
