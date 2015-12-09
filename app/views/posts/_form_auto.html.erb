@@ -13,6 +13,8 @@
 
   <div class="field">
     <%= f.label t(:case_title) %><br>
+    标题参考格式：接口名称 tag号（针对中间层）测试点描述<br>
+    如：/gamesdk/login tag=4 用户登录成功
     <%= f.text_field :title, class: "form-control"%>
   </div>
   <div class="field">
