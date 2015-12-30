@@ -89,7 +89,7 @@ class GetsController < ApplicationController
       @get_url = "http://#{@get[:url]}" unless @get[:url].include? "http"
       begin
         require 'myhttp'
-        result = MyHttp.get(@get_url)
+        result = MyHttp.get(@get_url, :format =>'json')
         array = @get[:result].gsub(' ','').chomp.split("\r\n")
         @wrongmsg = ""
         allin = false
@@ -142,7 +142,7 @@ class GetsController < ApplicationController
       @get_url = "http://#{@get[:url]}" unless @get[:url].include? "http"
       begin
         require 'myhttp'
-        result = MyHttp.get(@get_url)
+        result = MyHttp.get(@get_url, :format =>'json')
         array = @get[:result].gsub(' ','').chomp.split("\r\n")
         allin = false
         array.each do |line|
