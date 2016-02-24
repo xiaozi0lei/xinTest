@@ -15,8 +15,8 @@
 /log
 /tmp
 
-/features/get/*.bak
-/features/post/*.bak
+/features/get
+/features/post
 
 *.bak
 *.swp
@@ -24,4 +24,3 @@
 *~
 
 /tags
-/script
