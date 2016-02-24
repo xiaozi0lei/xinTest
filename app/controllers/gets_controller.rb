@@ -1,4 +1,3 @@
-require 'pry'
 class GetsController < ApplicationController
 # 在执行方法之前先
 # 1. 查找到对应的get数据

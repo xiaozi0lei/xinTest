@@ -52,7 +52,7 @@ class Features
       url = "http://#{params[:url]}"
     end
     # data
-    data = params[:data]
+    data = params[:data].gsub('|', '\|')
     # 将用例中的期望结果处理一下，去掉换行符和空行
     lines = params[:result]
     array1 = lines.chomp.split("\r\n")
