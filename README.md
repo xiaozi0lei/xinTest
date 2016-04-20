@@ -51,23 +51,3 @@ web automation test app
 11. 数据库迁移 `rake db:migrate`
 12. 启动程序 `rails s`
 
-## docker
-
-1. 启动官方postgreSQL数据库 `docker run --name db -e POSTGRES_PASSWORD=postgres -v /home/docker/db_data:/var/lib/postgresql/data -d postgres`
-2. 启动xinTest应用程序 `docker run --name xintest -it --link db:postgres -p 3000:3000 -d xiaozi0lei/xintest`
-
-**第一次执行需要运行一下下面的命令**
-
-1. 进入xintest容器 `docker exec -it xintest /bin/bash`
-2. 创建数据库和数据库迁移
-  ```bash
-  rake db:create
-  rake db:migrate
-  ```
-
-3. 以后再启动就不需要执行这两步.
-4. 通过 IP:3000 访问xintest即可
-
-## CentOS 安装docker
-http://docs.docker.com/installation/centos/
-
