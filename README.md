@@ -18,7 +18,7 @@ web automation test app
 3. 安装git
 4. 将github上的xinTest仓库克隆到本地
   ```bash
-  git clone git@gitlab.iduoku.cn:sunguolei/apiTest.git
+  git clone git@gitlab.iduoku.cn:QA/apiTest.git
   ```
 5. 安装postgreSQL
   ```sh
