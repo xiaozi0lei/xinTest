@@ -27,13 +27,18 @@ class AES
       'Content-Type' => 'application/json'
     # 'Referer' => 'http://music.baidu.com'
     })
-    decode = Base64.strict_decode64(response)
+    begin
+      decode = Base64.strict_decode64(response)
 
-    decipher = OpenSSL::Cipher.new('aes-128-ecb')
-    decipher.decrypt
-    decipher.key = key
-    decipher.iv = iv
-    plain = decipher.update(decode) + decipher.final
+      decipher = OpenSSL::Cipher.new('aes-128-ecb')
+      decipher.decrypt
+      decipher.key = key
+      decipher.iv = iv
+      plain = decipher.update(decode) + decipher.final
+    rescue Exception => e
+      e = "#{e.message} \n #{response.to_s}"
+      raise e
+    end
     
   end
 
