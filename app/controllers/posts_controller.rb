@@ -166,10 +166,18 @@ class PostsController < ApplicationController
       # 利用httparty的post类方法发送加密的data到server
       # 此处的self.class.get调用的是include HTTParty类中的方法post
       if key == "none"
-        @preview = AES.get_json_by_post_without_encode(url, data)
+        begin
+          @preview = AES.get_json_by_post_without_encode(url, data)
+        rescue Exception => e
+          @error = "Error: #{e}"
+        end
       else
-        # preview_result只是临时变量，存储测试返回的数据，不入库
-        @preview = AES.get_json_by_post(url, key, data)
+        begin
+          # preview_result只是临时变量，存储测试返回的数据，不入库
+          @preview = AES.get_json_by_post(url, key, data)
+        rescue Exception => e
+          @error = "Error: #{e}"
+        end
       end
       begin
         array = @post[:result].gsub(' ','').chomp.split("\r\n")
