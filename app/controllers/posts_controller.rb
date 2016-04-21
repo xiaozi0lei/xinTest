@@ -179,25 +179,29 @@ class PostsController < ApplicationController
           @error = "Error: #{e}"
         end
       end
-      begin
-        array = @post[:result].gsub(' ','').chomp.split("\r\n")
-        @wrongmsg = ""
-        allin = false
-        array.each do |line|
-          allin = true
-          @preview_results = @preview.force_encoding("UTF-8").include?"#{line}"
-          unless @preview_results then
-            allin = false
-            @wrongmsg = "#{line} 在返回结果中未匹配到"
-            break
+
+      # 如果请求发送错误后，不需要进行下面的操作
+      if ! @preview.nil?
+        begin
+          array = @post[:result].gsub(' ','').chomp.split("\r\n")
+          @wrongmsg = ""
+          allin = false
+          array.each do |line|
+            allin = true
+            @preview_results = @preview.force_encoding("UTF-8").include?"#{line}"
+            unless @preview_results then
+              allin = false
+              @wrongmsg = "#{line} 在返回结果中未匹配到"
+              break
+            end
           end
+          if allin then
+            @wrongmsg = "对比成功"
+          end
+          @preview_result = @preview
+        rescue Exception => e
+          @error = "Error: #{e}"
         end
-        if allin then
-          @wrongmsg = "对比成功"
-        end
-        @preview_result = @preview
-      rescue Exception => e
-        @error = "Error: #{e}"
       end
       respond_to do |format|
         format.js {}
