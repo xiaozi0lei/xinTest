@@ -169,14 +169,16 @@ class PostsController < ApplicationController
         begin
           @preview = AES.get_json_by_post_without_encode(url, data)
         rescue Exception => e
-          @error = "Error: #{e}"
+          @error = "Error: #{e}.\n#{Rails.backtrace_cleaner.clean(exception.backtrace).join("\n")}"
+          raise
         end
       else
         begin
           # preview_result只是临时变量，存储测试返回的数据，不入库
           @preview = AES.get_json_by_post(url, key, data)
         rescue Exception => e
-          @error = "Error: #{e}"
+          @error = "Error: #{e}.\n#{Rails.backtrace_cleaner.clean(exception.backtrace).join("\n")}"
+          raise
         end
       end
 
