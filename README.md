@@ -20,10 +20,11 @@ web automation test app
   ```bash
   git clone git@gitlab.iduoku.cn:QA/apiTest.git
   ```
-5. 安装postgreSQL
+5. 安装postgreSQL和mysql
   ```sh
-  audo yum install postgresql-server
+  sudo yum install postgresql-server
   sudo yum install postgresql-devel
+  sudo yum install mysql-devel
   ```
 
 6. 初始化数据库 `sudo service postgresql initdb`
