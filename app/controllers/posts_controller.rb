@@ -251,7 +251,8 @@ class PostsController < ApplicationController
         when 9 then
           @featureFile = File.join(File.dirname(__FILE__), "..", "..", "features", "post", "baidu_game.feature")
         else
-          raise "invalid project"
+          puts "new project here, not build feature file"
+          #raise "invalid project"
       end
     end
 
