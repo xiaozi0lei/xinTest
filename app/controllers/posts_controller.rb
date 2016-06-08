@@ -46,7 +46,13 @@ class PostsController < ApplicationController
   # 点击"新建Post用例页面"的创建按钮，后台执行的操作，保存测试用例，同时创建cucumber自动化测试用例
   def create
     data = @post[:data]
-    url = @post[:url]
+    # 处理url前面不带http的url，加上http://
+    if @post[:url].include? "http"
+      url = @post[:url]
+    else
+      url = "http://#{@post[:url]}"
+    end
+
     case @post[:project].to_i
       when 1, 2, 3, 4 then
         key = ENV['KEY1']
@@ -66,11 +72,24 @@ class PostsController < ApplicationController
       # 利用httparty的post类方法发送加密的data到server
       # 此处的self.class.get调用的是include HTTParty类中的方法post
       if key == "none"
-        @preview = AES.get_json_by_post_without_encode(url, data)
+
+        begin
+          @preview = AES.get_json_by_post_without_encode(url, data)
+        rescue Exception => e
+          @error = "Error: #{e} \n #{Rails.backtrace_cleaner.clean(e.backtrace).join("\n")}"
+        end
+
       else
-        # preview_result只是临时变量，存储测试返回的数据，不入库
-        @preview = AES.get_json_by_post(url, key, data)
+
+        begin
+          # preview_result只是临时变量，存储测试返回的数据，不入库
+          @preview = AES.get_json_by_post(url, key, data)
+        rescue Exception => e
+          @error = "Error: 项目选择是否正确？\n #{e} \n #{Rails.backtrace_cleaner.clean(e.backtrace).join("\n")}"
+        end
+
       end
+
       begin
         array = @post[:result].gsub(' ','').chomp.split("\r\n")
         @wrongmsg = ""
@@ -122,7 +141,13 @@ class PostsController < ApplicationController
       @post = Post.new(post_params)
     end
     data = @post[:data]
-    url = @post[:url]
+    # 处理url前面不带http的url，加上http://
+    if @post[:url].include? "http"
+      url = @post[:url]
+    else
+      url = "http://#{@post[:url]}"
+    end
+
     case @post[:project].to_i
       when 1, 2, 3, 4 then
         key = ENV['KEY1']

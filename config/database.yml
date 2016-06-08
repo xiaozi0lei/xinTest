@@ -6,9 +6,10 @@
 #
 default: &default
   adapter: postgresql
+  host: 192.168.1.109
   encoding: unicode
-  username: postgres
-  password: 
+  username: work
+  password: duoku2012
   port: 5432
   pool: 5
   timeout: 5000
