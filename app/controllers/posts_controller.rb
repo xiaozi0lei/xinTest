@@ -118,7 +118,7 @@ class PostsController < ApplicationController
       respond_to do |format|
         if @post.save
           # 保存成功后，先创建cucumber测试用例
-          Features.post_create(@featureFile, @post)
+          # Features.post_create(@featureFile, @post)
           # 转到创建成功页面
           format.html { redirect_to @post, notice: 'Post was successfully created.' }
           format.json { render :show, status: :created, location: @post }
@@ -212,9 +212,9 @@ class PostsController < ApplicationController
         # 如果用例更新成功后，先删除cucumber旧的测试用例，再添加更新后的测试用例到cucumber文件中
         if @post.update(post_params)
           # 删除老的cucumber测试用例
-          Features.destroy(@featureFile, @post)
+          # Features.destroy(@featureFile, @post)
           # 添加新的cucumber测试用例
-          Features.post_create(@featureFile, @post)
+          # Features.post_create(@featureFile, @post)
           # 提示更新成功
           format.html { redirect_to @post, notice: 'Post was successfully updated.' }
           format.json { render :show, status: :ok, location: @post }
@@ -235,7 +235,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     # 如果删除成功，则删除对应的cucumber测试用
-    Features.destroy(@featureFile, @post)
+    # Features.destroy(@featureFile, @post)
     # 提示删除成功
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
