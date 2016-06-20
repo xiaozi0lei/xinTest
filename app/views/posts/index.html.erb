@@ -3,18 +3,40 @@
 <div class="col-md-10">
   <h2>Post <%= t :case_list %></h2>
 
-  <%= link_to t(:new_case), new_post_path, class: "btn btn-primary" %>
-  | <%= link_to 'CPS', posts_path(:project => 10) %>
-  | <%= link_to '单机SDK', posts_path(:project => 1) %>
-  | <%= link_to '网游SDK', posts_path(:project => 2) %>
-  | <%= link_to '18183', posts_path(:project => 3) %>
-  | <%= link_to '争霸赛', posts_path(:project => 4) %>
-  | <%= link_to 'iOS SDK', posts_path(:project => 5) %>
-  | <%= link_to '百度星玩家', posts_path(:project => 6) %>
-  | <%= link_to '不加密', posts_path(:project => 7) %>
-  | <%= link_to 'CRM星玩家', posts_path(:project => 8) %>
-  | <%= link_to '百度游戏', posts_path(:project => 9) %>
-  | <br/><br/>
+  <%= link_to t(:new_case), new_post_path, class: "btn btn-primary right" %>
+
+  <ul class="nav nav-tabs">
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        项目 <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><%= link_to 'CPS', posts_path(:project => 10) %></li>
+        <li><%= link_to '单机SDK', posts_path(:project => 1) %></li>
+        <li><%= link_to '网游SDK', posts_path(:project => 2) %></li>
+        <li><%= link_to '18183', posts_path(:project => 3) %></li>
+        <li><%= link_to '争霸赛', posts_path(:project => 4) %></li>
+        <li class="divider"></li>
+        <li><%= link_to 'iOS SDK', posts_path(:project => 5) %></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        版本 <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><%= link_to 'CPS', posts_path(:project => 10) %></li>
+        <li><%= link_to '单机SDK', posts_path(:project => 1) %></li>
+        <li><%= link_to '网游SDK', posts_path(:project => 2) %></li>
+        <li><%= link_to '18183', posts_path(:project => 3) %></li>
+        <li><%= link_to '争霸赛', posts_path(:project => 4) %></li>
+        <li class="divider"></li>
+        <li><%= link_to 'iOS SDK', posts_path(:project => 5) %></li>
+      </ul>
+    </li>
+  </ul>
+
+  <br/><br/>
 
   <table class="table">
     <tr>
